@@ -799,6 +799,26 @@
         .portfolio-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+            border-color: var(--accent);
+        }
+
+        .portfolio-card.featured {
+            border-color: var(--accent);
+        }
+
+        .portfolio-card.featured .portfolio-company {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .portfolio-card.confidential {
+            border-style: dashed;
+        }
+
+        .portfolio-card.confidential .portfolio-image {
+            filter: grayscale(50%);
         }
 
         .portfolio-image {
@@ -814,11 +834,36 @@
             overflow: hidden;
         }
 
+        .portfolio-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .portfolio-card:hover .portfolio-image img {
+            transform: scale(1.1);
+        }
+
         .portfolio-image::after {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(to bottom, transparent 50%, var(--bg-surface));
+            background: linear-gradient(
+                to bottom,
+                rgba(10, 10, 10, 0.3) 0%,
+                rgba(10, 10, 10, 0.5) 50%,
+                var(--bg-surface) 100%
+            );
+            pointer-events: none;
+        }
+
+        .portfolio-image-icon {
+            position: absolute;
+            z-index: 2;
+            font-size: 48px;
+            color: var(--primary);
+            opacity: 0.9;
         }
 
         .portfolio-content {
@@ -1492,16 +1537,16 @@
         <div class="container">
             <div class="authority-grid">
                 <div class="authority-item reveal">
-                    <div class="authority-number">3+</div>
+                    <div class="authority-number">4+</div>
                     <div class="authority-label">Years in Web3, Gaming & Startups</div>
                 </div>
                 <div class="authority-item reveal reveal-delay-1">
-                    <div class="authority-number">1,600+</div>
-                    <div class="authority-label">New Members in 5 Months</div>
+                    <div class="authority-number">12+</div>
+                    <div class="authority-label">Projects & Partnerships</div>
                 </div>
                 <div class="authority-item reveal reveal-delay-2">
-                    <div class="authority-number">350+</div>
-                    <div class="authority-label">Weekly Active Communicators</div>
+                    <div class="authority-number">4,500+</div>
+                    <div class="authority-label">Community Members Grown</div>
                 </div>
                 <div class="authority-item reveal reveal-delay-3">
                     <div class="authority-number">60+</div>
@@ -1762,20 +1807,20 @@
                 </div>
 
                 <div class="tool-item reveal reveal-delay-3" data-category="content">
-                    <div class="tool-icon"><i class="ri-twitter-x-fill"></i></div>
-                    <span class="tool-name">Twitter/X</span>
+                    <div class="tool-icon"><i class="ri-edit-box-fill"></i></div>
+                    <span class="tool-name">Typefully</span>
                     <span class="tool-category">Content</span>
                 </div>
 
-                <div class="tool-item reveal reveal-delay-4" data-category="content">
-                    <div class="tool-icon"><i class="ri-tiktok-fill"></i></div>
-                    <span class="tool-name">TikTok</span>
-                    <span class="tool-category">Content</span>
+                <div class="tool-item reveal reveal-delay-4" data-category="automation">
+                    <div class="tool-icon"><i class="ri-openai-fill"></i></div>
+                    <span class="tool-name">ChatGPT</span>
+                    <span class="tool-category">Automation</span>
                 </div>
 
                 <div class="tool-item reveal reveal-delay-5" data-category="automation">
-                    <div class="tool-icon"><i class="ri-robot-fill"></i></div>
-                    <span class="tool-name">ChatGPT</span>
+                    <div class="tool-icon"><i class="ri-sparkling-fill"></i></div>
+                    <span class="tool-name">Claude AI</span>
                     <span class="tool-category">Automation</span>
                 </div>
 
@@ -1793,64 +1838,125 @@
                 </div>
 
                 <div class="tool-item reveal reveal-delay-2" data-category="automation">
+                    <div class="tool-icon"><i class="ri-flow-chart"></i></div>
+                    <span class="tool-name">n8n</span>
+                    <span class="tool-category">Automation</span>
+                </div>
+
+                <div class="tool-item reveal reveal-delay-3" data-category="automation">
                     <div class="tool-icon"><i class="ri-database-2-fill"></i></div>
                     <span class="tool-name">Airtable</span>
                     <span class="tool-category">Automation</span>
                 </div>
 
-                <div class="tool-item reveal reveal-delay-3" data-category="automation">
+                <div class="tool-item reveal reveal-delay-4" data-category="automation">
                     <div class="tool-icon"><i class="ri-file-list-3-fill"></i></div>
                     <span class="tool-name">Notion</span>
                     <span class="tool-category">Automation</span>
                 </div>
 
-                <div class="tool-item reveal reveal-delay-4" data-category="automation">
+                <div class="tool-item reveal reveal-delay-5" data-category="automation">
                     <div class="tool-icon"><i class="ri-google-fill"></i></div>
                     <span class="tool-name">Google Workspace</span>
                     <span class="tool-category">Automation</span>
                 </div>
 
-                <div class="tool-item reveal reveal-delay-5" data-category="automation">
-                    <div class="tool-icon"><i class="ri-calendar-check-fill"></i></div>
-                    <span class="tool-name">Calendly</span>
+                <div class="tool-item reveal" data-category="automation">
+                    <div class="tool-icon"><i class="ri-search-eye-fill"></i></div>
+                    <span class="tool-name">Perplexity</span>
+                    <span class="tool-category">Automation</span>
+                </div>
+
+                <div class="tool-item reveal reveal-delay-1" data-category="automation">
+                    <div class="tool-icon"><i class="ri-bookmark-fill"></i></div>
+                    <span class="tool-name">NotebookLM</span>
+                    <span class="tool-category">Automation</span>
+                </div>
+
+                <!-- Payment & Platform Tools -->
+                <div class="tool-item reveal reveal-delay-2" data-category="automation">
+                    <div class="tool-icon"><i class="ri-bank-card-fill"></i></div>
+                    <span class="tool-name">Stripe</span>
+                    <span class="tool-category">Automation</span>
+                </div>
+
+                <div class="tool-item reveal reveal-delay-3" data-category="automation">
+                    <div class="tool-icon"><i class="ri-graduation-cap-fill"></i></div>
+                    <span class="tool-name">Kajabi</span>
                     <span class="tool-category">Automation</span>
                 </div>
 
                 <!-- Development Tools -->
-                <div class="tool-item reveal" data-category="development">
+                <div class="tool-item reveal reveal-delay-4" data-category="development">
                     <div class="tool-icon"><i class="ri-nodejs-fill"></i></div>
                     <span class="tool-name">Node.js</span>
                     <span class="tool-category">Development</span>
                 </div>
 
-                <div class="tool-item reveal reveal-delay-1" data-category="development">
+                <div class="tool-item reveal reveal-delay-5" data-category="development">
                     <div class="tool-icon"><i class="ri-code-s-slash-fill"></i></div>
                     <span class="tool-name">Python</span>
                     <span class="tool-category">Development</span>
                 </div>
 
+                <div class="tool-item reveal" data-category="development">
+                    <div class="tool-icon"><i class="ri-code-box-fill"></i></div>
+                    <span class="tool-name">PHP</span>
+                    <span class="tool-category">Development</span>
+                </div>
+
+                <div class="tool-item reveal reveal-delay-1" data-category="development">
+                    <div class="tool-icon"><i class="ri-global-fill"></i></div>
+                    <span class="tool-name">WordPress</span>
+                    <span class="tool-category">Development</span>
+                </div>
+
                 <div class="tool-item reveal reveal-delay-2" data-category="development">
-                    <div class="tool-icon"><i class="ri-git-branch-fill"></i></div>
-                    <span class="tool-name">Git</span>
+                    <div class="tool-icon"><i class="ri-braces-fill"></i></div>
+                    <span class="tool-name">REST APIs</span>
                     <span class="tool-category">Development</span>
                 </div>
 
                 <div class="tool-item reveal reveal-delay-3" data-category="development">
-                    <div class="tool-icon"><i class="ri-terminal-box-fill"></i></div>
-                    <span class="tool-name">Discord.js</span>
+                    <div class="tool-icon"><i class="ri-send-plane-fill"></i></div>
+                    <span class="tool-name">Postman</span>
+                    <span class="tool-category">Development</span>
+                </div>
+
+                <div class="tool-item reveal reveal-delay-4" data-category="development">
+                    <div class="tool-icon"><i class="ri-server-fill"></i></div>
+                    <span class="tool-name">Heroku</span>
                     <span class="tool-category">Development</span>
                 </div>
 
                 <!-- Content Tools -->
-                <div class="tool-item reveal reveal-delay-4" data-category="content">
+                <div class="tool-item reveal reveal-delay-5" data-category="content">
                     <div class="tool-icon"><i class="ri-palette-fill"></i></div>
                     <span class="tool-name">Canva</span>
                     <span class="tool-category">Content</span>
                 </div>
 
-                <div class="tool-item reveal reveal-delay-5" data-category="content">
-                    <div class="tool-icon"><i class="ri-pen-nib-fill"></i></div>
-                    <span class="tool-name">Figma</span>
+                <div class="tool-item reveal" data-category="content">
+                    <div class="tool-icon"><i class="ri-film-fill"></i></div>
+                    <span class="tool-name">Premiere Pro</span>
+                    <span class="tool-category">Content</span>
+                </div>
+
+                <div class="tool-item reveal reveal-delay-1" data-category="content">
+                    <div class="tool-icon"><i class="ri-image-edit-fill"></i></div>
+                    <span class="tool-name">Photoshop</span>
+                    <span class="tool-category">Content</span>
+                </div>
+
+                <div class="tool-item reveal reveal-delay-2" data-category="content">
+                    <div class="tool-icon"><i class="ri-video-fill"></i></div>
+                    <span class="tool-name">CapCut</span>
+                    <span class="tool-category">Content</span>
+                </div>
+
+                <div class="tool-item reveal reveal-delay-3" data-category="content">
+                    <div class="tool-icon"><i class="ri-youtube-fill"></i></div>
+                    <span class="tool-name">YouTube</span>
                     <span class="tool-category">Content</span>
                 </div>
             </div>
@@ -1864,89 +1970,349 @@
                 <span class="section-label">Portfolio</span>
                 <h2 class="section-title">Projects & Results</h2>
                 <p class="section-subtitle">
-                    Real systems built. Real results delivered. Here's a look at my hybrid operator work.
+                    From Web3 gaming to AI automation—real systems built, real results delivered across 12+ projects.
                 </p>
             </div>
 
             <div class="portfolio-grid">
-                <div class="portfolio-card reveal">
+                <!-- Base Philippines -->
+                <div class="portfolio-card featured reveal">
                     <div class="portfolio-image">
-                        <i class="ri-building-line"></i>
+                        <img src="https://www.base.org/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcore.831219b6.png&w=1080&q=99" alt="Base Philippines">
                     </div>
                     <div class="portfolio-content">
-                        <div class="portfolio-company">BlockchainSpace</div>
-                        <h3 class="portfolio-title">Growth & Operational Systems</h3>
+                        <div class="portfolio-company">Base Philippines</div>
+                        <h3 class="portfolio-title">Contributor</h3>
                         <div class="portfolio-results">
                             <h4>Results</h4>
                             <ul>
-                                <li>1,600 members in 5 months</li>
-                                <li>350+ weekly active communicators</li>
-                                <li>100+ event participants (3+ months)</li>
+                                <li>Awarded Based Builder Spirit Award (May 2025)</li>
+                                <li>Facilitated Base Ecosystem group discussions</li>
+                                <li>Hosted 3 Base Events with 200+ attendees</li>
+                                <li>PH Based Voices creator (Aug 2025)</li>
                             </ul>
                         </div>
                         <div class="portfolio-systems">
-                            <h4>Systems Built</h4>
+                            <h4>Focus Areas</h4>
                             <div class="portfolio-tags">
-                                <span class="portfolio-tag">Moderation Framework</span>
-                                <span class="portfolio-tag">Support Automation</span>
-                                <span class="portfolio-tag">Event Cadence</span>
-                                <span class="portfolio-tag">Anti-Scam Protocols</span>
+                                <span class="portfolio-tag">Content Creation</span>
+                                <span class="portfolio-tag">Event Management</span>
+                                <span class="portfolio-tag">Community Engagement</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="portfolio-card reveal reveal-delay-1">
+                <!-- BlockchainSpace -->
+                <div class="portfolio-card featured reveal reveal-delay-1">
                     <div class="portfolio-image">
-                        <i class="ri-gamepad-line"></i>
+                        <img src="https://pbs.twimg.com/profile_banners/1690933410838261760/1732541294/1500x500" alt="BlockchainSpace">
+                    </div>
+                    <div class="portfolio-content">
+                        <div class="portfolio-company">BlockchainSpace / YEY.tech</div>
+                        <h3 class="portfolio-title">BizDev Associate → Lead Mod → Bot Master</h3>
+                        <div class="portfolio-results">
+                            <h4>Results</h4>
+                            <ul>
+                                <li>Grew community by 2,000+ unique members</li>
+                                <li>334+ active communicators achieved</li>
+                                <li>Supervised team of 4 moderators</li>
+                                <li>Secured podcast guests & whitelist spots</li>
+                            </ul>
+                        </div>
+                        <div class="portfolio-systems">
+                            <h4>Systems Built</h4>
+                            <div class="portfolio-tags">
+                                <span class="portfolio-tag">Bot Management</span>
+                                <span class="portfolio-tag">Bilingual Support</span>
+                                <span class="portfolio-tag">Event Coordination</span>
+                                <span class="portfolio-tag">Team Leadership</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Confidential -->
+                <div class="portfolio-card featured confidential reveal reveal-delay-2">
+                    <div class="portfolio-image">
+                        <img src="https://placehold.co/600x400/1f1f1f/737373?text=Confidential" alt="Confidential Client">
+                    </div>
+                    <div class="portfolio-content">
+                        <div class="portfolio-company">🔒 Confidential Client</div>
+                        <h3 class="portfolio-title">AI Automation Specialist</h3>
+                        <div class="portfolio-results">
+                            <h4>Results</h4>
+                            <ul>
+                                <li>Custom AI workflow development</li>
+                                <li>Automation systems implementation</li>
+                                <li>Process optimization & scaling</li>
+                                <li>30-60 hours/month operational savings</li>
+                            </ul>
+                        </div>
+                        <div class="portfolio-systems">
+                            <h4>Systems Built</h4>
+                            <div class="portfolio-tags">
+                                <span class="portfolio-tag">AI Agents</span>
+                                <span class="portfolio-tag">Workflow Automation</span>
+                                <span class="portfolio-tag">Custom Bots</span>
+                                <span class="portfolio-tag">CRM Integration</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Galaxy Fight Club -->
+                <div class="portfolio-card reveal reveal-delay-2">
+                    <div class="portfolio-image">
+                        <img src="https://assets.gam3s.gg/Galaxy_Fight_Club_Review_Meta_Image_ecafe54c55.png" alt="Galaxy Fight Club">
                     </div>
                     <div class="portfolio-content">
                         <div class="portfolio-company">Galaxy Fight Club</div>
-                        <h3 class="portfolio-title">Social + Community Integration</h3>
+                        <h3 class="portfolio-title">Social Media Manager</h3>
                         <div class="portfolio-results">
                             <h4>Results</h4>
                             <ul>
                                 <li>Weekly impressions: 8k → 20k+</li>
                                 <li>Engagement rate: 2-3% → 6%</li>
-                                <li>Cross-IP PvP game partnerships</li>
+                                <li>Developed bilingual content strategy</li>
+                                <li>Cross-IP PvP NFT game partnerships</li>
                             </ul>
                         </div>
                         <div class="portfolio-systems">
-                            <h4>Systems Built</h4>
+                            <h4>Focus Areas</h4>
                             <div class="portfolio-tags">
-                                <span class="portfolio-tag">Social Analytics</span>
-                                <span class="portfolio-tag">Content Integration</span>
-                                <span class="portfolio-tag">Engagement Alignment</span>
+                                <span class="portfolio-tag">Content Strategy</span>
+                                <span class="portfolio-tag">Analytics</span>
+                                <span class="portfolio-tag">Video Editing</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="portfolio-card reveal reveal-delay-2">
+                <!-- SAINTS OF LA -->
+                <div class="portfolio-card reveal">
                     <div class="portfolio-image">
-                        <i class="ri-group-line"></i>
+                        <img src="https://shopsaints.xyz/cdn/shop/files/NFT.png?v=1729344863&width=1500" alt="SAINTS OF LA">
                     </div>
                     <div class="portfolio-content">
-                        <div class="portfolio-company">AXCS Vision Guild</div>
-                        <h3 class="portfolio-title">Ops Leadership & Execution</h3>
+                        <div class="portfolio-company">SAINTS OF LA</div>
+                        <h3 class="portfolio-title">Community Mod & Discord Security</h3>
                         <div class="portfolio-results">
                             <h4>Results</h4>
                             <ul>
-                                <li>Managed 70+ scholars</li>
-                                <li>200+ support tickets resolved</li>
-                                <li>Stabilized internal communication</li>
+                                <li>Community growth: 200 → 2,500+ members</li>
+                                <li>Managed 500+ support tickets</li>
+                                <li>Top-tier security during minting</li>
+                                <li>Safeguarded community interests</li>
+                            </ul>
+                        </div>
+                        <div class="portfolio-systems">
+                            <h4>Focus Areas</h4>
+                            <div class="portfolio-tags">
+                                <span class="portfolio-tag">Discord Security</span>
+                                <span class="portfolio-tag">Minting Support</span>
+                                <span class="portfolio-tag">Community Growth</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ancient8 -->
+                <div class="portfolio-card reveal">
+                    <div class="portfolio-image">
+                        <img src="https://ancient8.gg/images/thumbnail.jpg" alt="Ancient8">
+                    </div>
+                    <div class="portfolio-content">
+                        <div class="portfolio-company">Ancient8</div>
+                        <h3 class="portfolio-title">Ambassador & Content Creator</h3>
+                        <div class="portfolio-results">
+                            <h4>Results</h4>
+                            <ul>
+                                <li>Brand ambassador representation</li>
+                                <li>Content creation for Web3 gaming</li>
+                                <li>Community engagement initiatives</li>
+                                <li>Educational content development</li>
+                            </ul>
+                        </div>
+                        <div class="portfolio-systems">
+                            <h4>Focus Areas</h4>
+                            <div class="portfolio-tags">
+                                <span class="portfolio-tag">Content Creation</span>
+                                <span class="portfolio-tag">Brand Advocacy</span>
+                                <span class="portfolio-tag">Community Growth</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CoreDAO -->
+                <div class="portfolio-card reveal reveal-delay-1">
+                    <div class="portfolio-image">
+                        <img src="https://iq.wiki/cdn-cgi/image/width=1200,quality=95/https://ipfs.everipedia.org/ipfs/QmVYi5czjoDwDtnufAv3e2GpdxrGpMkRxyfukzPJA6ucmR" alt="CoreDAO">
+                    </div>
+                    <div class="portfolio-content">
+                        <div class="portfolio-company">CoreDAO</div>
+                        <h3 class="portfolio-title">Ambassador</h3>
+                        <div class="portfolio-results">
+                            <h4>Results</h4>
+                            <ul>
+                                <li>Blockchain ecosystem advocacy</li>
+                                <li>Community education & support</li>
+                                <li>Twitter/X space guesting</li>
+                                <li>Network expansion initiatives</li>
+                            </ul>
+                        </div>
+                        <div class="portfolio-systems">
+                            <h4>Focus Areas</h4>
+                            <div class="portfolio-tags">
+                                <span class="portfolio-tag">Ambassador Program</span>
+                                <span class="portfolio-tag">Community Education</span>
+                                <span class="portfolio-tag">Ecosystem Growth</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lootify -->
+                <div class="portfolio-card reveal reveal-delay-2">
+                    <div class="portfolio-image">
+                        <img src="https://pbs.twimg.com/profile_banners/1848817679244681217/1729678185/1500x500" alt="Lootify">
+                    </div>
+                    <div class="portfolio-content">
+                        <div class="portfolio-company">Lootify</div>
+                        <h3 class="portfolio-title">Community Moderator</h3>
+                        <div class="portfolio-results">
+                            <h4>Results</h4>
+                            <ul>
+                                <li>Community moderation & support</li>
+                                <li>User engagement management</li>
+                                <li>Ticket support handling</li>
+                                <li>Community guidelines enforcement</li>
+                            </ul>
+                        </div>
+                        <div class="portfolio-systems">
+                            <h4>Focus Areas</h4>
+                            <div class="portfolio-tags">
+                                <span class="portfolio-tag">Moderation</span>
+                                <span class="portfolio-tag">User Support</span>
+                                <span class="portfolio-tag">Community Safety</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pukecast -->
+                <div class="portfolio-card reveal">
+                    <div class="portfolio-image">
+                        <img src="https://i.scdn.co/image/ab6765630000ba8af4836f0209814da61fb1ebe8" alt="Pukecast">
+                    </div>
+                    <div class="portfolio-content">
+                        <div class="portfolio-company">Pukecast</div>
+                        <h3 class="portfolio-title">Lead Generator | Twitter/X</h3>
+                        <div class="portfolio-results">
+                            <h4>Results</h4>
+                            <ul>
+                                <li>Cold messaging campaigns across chains</li>
+                                <li>Reply guy for Twitter/X account</li>
+                                <li>Compiled web3 project records</li>
+                                <li>Streamlined lead generation processes</li>
+                            </ul>
+                        </div>
+                        <div class="portfolio-systems">
+                            <h4>Focus Areas</h4>
+                            <div class="portfolio-tags">
+                                <span class="portfolio-tag">Lead Generation</span>
+                                <span class="portfolio-tag">Outreach</span>
+                                <span class="portfolio-tag">Data Management</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Erovoutika -->
+                <div class="portfolio-card reveal reveal-delay-1">
+                    <div class="portfolio-image">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-mKWsl2e_Ug8qhr-fWRWrbVIypEh1VOaHMw&s" alt="Erovoutika">
+                    </div>
+                    <div class="portfolio-content">
+                        <div class="portfolio-company">Erovoutika</div>
+                        <h3 class="portfolio-title">IT Intern & Security Researcher</h3>
+                        <div class="portfolio-results">
+                            <h4>Results</h4>
+                            <ul>
+                                <li>Created HTML/CSS video tutorials</li>
+                                <li>Managed YouTube & Facebook pages</li>
+                                <li>Technical Head for eVIP Awards</li>
+                                <li>Fixed website vulnerabilities</li>
+                            </ul>
+                        </div>
+                        <div class="portfolio-systems">
+                            <h4>Focus Areas</h4>
+                            <div class="portfolio-tags">
+                                <span class="portfolio-tag">Web Development</span>
+                                <span class="portfolio-tag">Video Production</span>
+                                <span class="portfolio-tag">Security Research</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Burning Dragons -->
+                <div class="portfolio-card reveal reveal-delay-2">
+                    <div class="portfolio-image">
+                        <img src="https://pbs.twimg.com/profile_banners/1531858885006749697/1656670342/1500x500" alt="Burning Dragons">
+                    </div>
+                    <div class="portfolio-content">
+                        <div class="portfolio-company">Burning Dragons</div>
+                        <h3 class="portfolio-title">Community Moderator</h3>
+                        <div class="portfolio-results">
+                            <h4>Results</h4>
+                            <ul>
+                                <li>Managed 50 tickets during NFT minting</li>
+                                <li>Developed bilingual event scripts</li>
+                                <li>Configured bots & server channels</li>
+                                <li>Ensured accurate translations</li>
+                            </ul>
+                        </div>
+                        <div class="portfolio-systems">
+                            <h4>Focus Areas</h4>
+                            <div class="portfolio-tags">
+                                <span class="portfolio-tag">Bot Configuration</span>
+                                <span class="portfolio-tag">NFT Support</span>
+                                <span class="portfolio-tag">Bilingual Content</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AXCS Vision Guild -->
+                <div class="portfolio-card reveal reveal-delay-1">
+                    <div class="portfolio-image">
+                        <img src="https://placehold.co/600x400/1f1f1f/f59e0b?text=AXCS+Vision+Guild" alt="AXCS Vision Guild">
+                    </div>
+                    <div class="portfolio-content">
+                        <div class="portfolio-company">AXCS Vision Guild</div>
+                        <h3 class="portfolio-title">Guild Leader & Founder</h3>
+                        <div class="portfolio-results">
+                            <h4>Results</h4>
+                            <ul>
+                                <li>Founded & led 70+ scholar community</li>
+                                <li>Resolved 200+ support tickets</li>
+                                <li>Bilingual support (Tagalog/English)</li>
+                                <li>Axie Infinity ecosystem management</li>
                             </ul>
                         </div>
                         <div class="portfolio-systems">
                             <h4>Systems Built</h4>
                             <div class="portfolio-tags">
-                                <span class="portfolio-tag">Onboarding Workflows</span>
+                                <span class="portfolio-tag">Onboarding Flows</span>
                                 <span class="portfolio-tag">Cashout Pipeline</span>
-                                <span class="portfolio-tag">Performance Dashboard</span>
+                                <span class="portfolio-tag">Scholar Management</span>
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
