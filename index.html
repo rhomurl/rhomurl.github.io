@@ -7,19 +7,19 @@
 
     <!-- Primary Meta Tags -->
     <meta name="title" content="RHOMURL | AI Automation & Community Operations Specialist">
-    <meta name="description" content="I build automated, scalable community infrastructures that reduce manual workload, reinforce culture, eliminate chaos, and turn communities into predictable assets.">
+    <meta name="description" content="I build automated community infrastructures for coaches, startups, and Web3 teams. 60+ hours of manual work removed monthly. Trusted by Base, BlockchainSpace, Ancient8, and more.">
     <meta name="author" content="Rhomuel Brian Macahilig">
-    <meta name="keywords" content="RHOMURL, Web3, AI Automation, Community Management, Discord Bot, Content Creation, Community Operations">
+    <meta name="keywords" content="RHOMURL, Web3, AI Automation, Community Management, Discord Bot, n8n, Community Operations">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="RHOMURL | AI Automation & Community Operations Specialist">
-    <meta property="og:description" content="I build automated, scalable community infrastructures that reduce manual workload, reinforce culture, eliminate chaos, and turn communities into predictable assets.">
+    <meta property="og:description" content="I build automated community infrastructures for coaches, startups, and Web3 teams. 60+ hours of manual work removed monthly.">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:title" content="RHOMURL | AI Automation & Community Operations Specialist">
-    <meta property="twitter:description" content="I build automated, scalable community infrastructures that reduce manual workload, reinforce culture, eliminate chaos, and turn communities into predictable assets.">
+    <meta property="twitter:description" content="I build automated community infrastructures for coaches, startups, and Web3 teams. 60+ hours of manual work removed monthly.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -67,46 +67,12 @@
             font-weight: 700;
         }
 
-        /* Loading Screen */
-        .loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--bg-primary);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.6s ease, visibility 0.6s ease;
-        }
-
-        .loading-overlay.hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        .loader {
-            width: 60px;
-            height: 60px;
-            border: 3px solid var(--bg-surface);
-            border-top-color: var(--primary);
-            border-radius: 50%;
-            animation: spin 1s ease-in-out infinite;
-        }
-
-        .loader-text {
-            margin-top: 20px;
-            font-size: 14px;
-            color: var(--text-muted);
-            letter-spacing: 3px;
-            text-transform: uppercase;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+            html { scroll-behavior: auto; }
         }
 
         /* Navigation */
@@ -185,6 +151,11 @@
             width: 100%;
         }
 
+        .nav-link:focus-visible, .btn:focus-visible, .social-link:focus-visible {
+            outline: 2px solid var(--primary);
+            outline-offset: 3px;
+        }
+
         .nav-mobile-toggle {
             display: none;
             background: none;
@@ -212,6 +183,7 @@
             position: relative;
             overflow: hidden;
             padding-top: 100px;
+            padding-bottom: 60px;
         }
 
         .hero-bg-glow {
@@ -243,7 +215,7 @@
         .hero-text {
             opacity: 0;
             transform: translateY(40px);
-            animation: fadeInUp 1s ease forwards 0.3s;
+            animation: fadeInUp 0.8s ease forwards 0.1s;
         }
 
         @keyframes fadeInUp {
@@ -281,42 +253,45 @@
         }
 
         .hero-title {
-            font-size: clamp(48px, 8vw, 90px);
-            line-height: 1;
-            margin-bottom: 20px;
-            letter-spacing: -2px;
+            font-size: clamp(42px, 6vw, 72px);
+            line-height: 1.05;
+            margin-bottom: 24px;
+            letter-spacing: -1px;
         }
 
         .hero-title span {
-            background: var(--gradient-primary);
+            background: linear-gradient(120deg, #f59e0b 0%, #b45309 40%, #fbbf24 60%, #f59e0b 100%);
+            background-size: 250% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            animation: shimmer 7s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { background-position: 0% center; }
+            50% { background-position: 100% center; }
         }
 
         .hero-subtitle {
             font-family: 'Outfit', sans-serif;
-            font-size: 20px;
+            font-size: 19px;
             font-weight: 400;
             color: var(--text-secondary);
-            margin-bottom: 30px;
-            max-width: 500px;
+            margin-bottom: 36px;
+            max-width: 520px;
         }
 
-        .hero-problem {
-            font-size: 16px;
-            color: var(--text-muted);
-            margin-bottom: 40px;
-            padding-left: 20px;
-            border-left: 2px solid var(--accent);
-            max-width: 500px;
-            line-height: 1.8;
+        .hero-subtitle strong {
+            color: var(--text-primary);
+            font-weight: 600;
         }
 
         .hero-cta {
             display: flex;
             gap: 20px;
             flex-wrap: wrap;
+            margin-bottom: 48px;
         }
 
         .btn {
@@ -336,10 +311,41 @@
             border: none;
         }
 
+        /* Scroll progress bar */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            width: 0%;
+            background: var(--gradient-primary);
+            z-index: 1001;
+            transition: width 0.1s linear;
+        }
+
         .btn-primary {
             background: var(--gradient-primary);
             color: var(--bg-primary);
             box-shadow: 0 4px 30px rgba(245, 158, 11, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Sheen sweep on hover */
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -80%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(105deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+            transform: skewX(-20deg);
+            transition: left 0.6s ease;
+        }
+
+        .btn-primary:hover::after {
+            left: 130%;
         }
 
         .btn-primary:hover {
@@ -358,11 +364,66 @@
             color: var(--primary);
         }
 
+        /* Trust strip inside hero */
+        .hero-trust {
+            border-top: 1px solid var(--border);
+            padding-top: 28px;
+            max-width: 560px;
+        }
+
+        .hero-trust-label {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 14px;
+        }
+
+        .hero-trust-brands {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px 32px;
+            align-items: center;
+        }
+
+        /* Logo images: export transparent PNGs at 2x (height 64px), display at 32px */
+        .brand-logo {
+            height: 32px;
+            width: auto;
+            max-width: 140px;
+            object-fit: contain;
+            filter: grayscale(100%) brightness(1.6);
+            opacity: 0.55;
+            transition: filter 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .brand-logo:hover {
+            filter: grayscale(0%) brightness(1);
+            opacity: 1;
+            transform: translateY(-3px);
+        }
+
+        /* Text fallback while logo files are missing */
+        .brand-logo-fallback {
+            font-family: 'Playfair Display', serif;
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+            transition: color 0.3s ease;
+        }
+
+        .brand-logo-fallback:hover {
+            color: var(--primary);
+        }
+
         .hero-image {
             position: relative;
             opacity: 0;
             transform: translateX(40px);
-            animation: fadeInRight 1s ease forwards 0.6s;
+            animation: fadeInRight 0.8s ease forwards 0.3s;
         }
 
         @keyframes fadeInRight {
@@ -526,6 +587,13 @@
             font-size: 28px;
             color: var(--primary);
             margin-bottom: 25px;
+            transition: all 0.4s ease;
+        }
+
+        .service-card:hover .service-icon {
+            background: var(--gradient-primary);
+            color: var(--bg-primary);
+            transform: scale(1.08) rotate(-4deg);
         }
 
         .service-badge {
@@ -572,75 +640,9 @@
             font-weight: 600;
         }
 
-        /* Problems Section */
-        #problems {
-            background: var(--bg-secondary);
-        }
-
-        .problems-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
-        }
-
-        .problem-card {
-            background: var(--bg-surface);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 35px;
-            display: flex;
-            gap: 20px;
-            transition: all 0.3s ease;
-        }
-
-        .problem-card:hover {
-            border-color: var(--accent);
-            transform: translateX(10px);
-        }
-
-        .problem-number {
-            font-family: 'Playfair Display', serif;
-            font-size: 32px;
-            font-weight: 700;
-            color: var(--accent);
-            line-height: 1;
-        }
-
-        .problem-content h3 {
-            font-family: 'Outfit', sans-serif;
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-
-        .problem-content p {
-            font-size: 14px;
-            color: var(--text-muted);
-            line-height: 1.7;
-        }
-
-        .problems-cta {
-            text-align: center;
-            margin-top: 60px;
-            padding: 40px;
-            background: var(--bg-primary);
-            border-radius: 16px;
-            border: 1px solid var(--border);
-        }
-
-        .problems-cta p {
-            font-size: 20px;
-            color: var(--text-secondary);
-            margin-bottom: 10px;
-        }
-
-        .problems-cta strong {
-            color: var(--primary);
-        }
-
         /* RHO System Section */
         #system {
-            background: var(--bg-primary);
+            background: var(--bg-secondary);
             position: relative;
         }
 
@@ -695,7 +697,7 @@
         }
 
         .system-card {
-            background: var(--bg-secondary);
+            background: var(--bg-surface);
             border: 1px solid var(--border);
             border-radius: 16px;
             padding: 40px;
@@ -746,7 +748,7 @@
 
         .system-deliverables {
             text-align: left;
-            background: var(--bg-surface);
+            background: var(--bg-secondary);
             border-radius: 10px;
             padding: 20px;
         }
@@ -759,6 +761,10 @@
             letter-spacing: 1px;
             text-transform: uppercase;
             margin-bottom: 15px;
+        }
+
+        .system-deliverables ul {
+            list-style: none;
         }
 
         .system-deliverables li {
@@ -775,6 +781,69 @@
             left: 0;
             color: var(--primary);
             font-size: 11px;
+        }
+
+        /* Tools Section */
+        #tools {
+            background: var(--bg-primary);
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 20px;
+        }
+
+        .tool-item {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.4s ease;
+            cursor: default;
+        }
+
+        .tool-item:hover {
+            border-color: var(--accent);
+            background: var(--bg-surface);
+            box-shadow: 0 10px 40px rgba(245, 158, 11, 0.1);
+        }
+
+        .tool-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--bg-surface);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: var(--primary);
+            transition: all 0.4s ease;
+        }
+
+        .tool-item:hover .tool-icon {
+            background: var(--gradient-primary);
+            color: var(--bg-primary);
+            transform: scale(1.1);
+        }
+
+        .tool-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-align: center;
+        }
+
+        .tool-category {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         /* Portfolio Section */
@@ -813,14 +882,6 @@
             background-clip: text;
         }
 
-        .portfolio-card.confidential {
-            border-style: dashed;
-        }
-
-        .portfolio-card.confidential .portfolio-image {
-            filter: grayscale(50%);
-        }
-
         .portfolio-image {
             width: 100%;
             height: 200px;
@@ -828,10 +889,22 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 48px;
-            color: var(--primary);
             position: relative;
             overflow: hidden;
+        }
+
+        .portfolio-image-fallback {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 56px;
+            font-weight: 800;
+            color: var(--primary);
+            opacity: 0.85;
+            z-index: 0;
         }
 
         .portfolio-image img {
@@ -839,6 +912,8 @@
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s ease;
+            position: relative;
+            z-index: 1;
         }
 
         .portfolio-card:hover .portfolio-image img {
@@ -856,14 +931,7 @@
                 var(--bg-surface) 100%
             );
             pointer-events: none;
-        }
-
-        .portfolio-image-icon {
-            position: absolute;
             z-index: 2;
-            font-size: 48px;
-            color: var(--primary);
-            opacity: 0.9;
         }
 
         .portfolio-content {
@@ -896,6 +964,10 @@
             letter-spacing: 1px;
             text-transform: uppercase;
             margin-bottom: 12px;
+        }
+
+        .portfolio-results ul {
+            list-style: none;
         }
 
         .portfolio-results li {
@@ -941,119 +1013,266 @@
             border-radius: 6px;
             font-size: 12px;
             color: var(--text-muted);
-        }
-
-        /* Workflows Section */
-        #workflows {
-            background: var(--bg-primary);
-        }
-
-        .workflows-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 20px;
-        }
-
-        .workflow-item {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 25px 20px;
-            text-align: center;
             transition: all 0.3s ease;
         }
 
-        .workflow-item:hover {
-            border-color: var(--primary);
-            transform: translateY(-5px);
+        .portfolio-tag:hover {
+            background: rgba(245, 158, 11, 0.12);
+            color: var(--primary);
         }
 
-        .workflow-icon {
-            width: 50px;
-            height: 50px;
-            background: var(--bg-surface);
-            border-radius: 10px;
+        /* Proof gallery inside portfolio cards */
+        .portfolio-proof {
+            margin-bottom: 25px;
+        }
+
+        .portfolio-proof h4 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .proof-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .proof-item {
+            position: relative;
+            display: block;
+            aspect-ratio: 16 / 9;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background: var(--bg-elevated);
+            cursor: pointer;
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .proof-item:hover {
+            border-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .proof-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .proof-item .proof-play {
+            position: absolute;
+            inset: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
-            color: var(--primary);
-            margin: 0 auto 15px;
+            font-size: 26px;
+            color: #fff;
+            background: rgba(10, 10, 10, 0.45);
+            transition: background 0.3s ease;
         }
 
-        .workflow-item h4 {
-            font-family: 'Outfit', sans-serif;
-            font-size: 13px;
-            font-weight: 600;
+        .proof-item:hover .proof-play {
+            background: rgba(245, 158, 11, 0.5);
+        }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(10, 10, 10, 0.92);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: min(1100px, 90vw);
+            max-height: 85vh;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 25px;
+            right: 30px;
+            background: none;
+            border: none;
             color: var(--text-primary);
-            line-height: 1.4;
+            font-size: 34px;
+            cursor: pointer;
         }
 
-        .workflows-note {
+        .lightbox-caption {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--text-secondary);
+            font-size: 14px;
             text-align: center;
-            margin-top: 50px;
-            color: var(--text-muted);
-            font-size: 15px;
+            max-width: 80vw;
         }
 
-        /* Case Studies Section */
-        #cases {
+        .lightbox-caption a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* Network / Connections Section */
+        #network {
             background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            padding: 90px 40px;
         }
 
-        .cases-grid {
+        .network-band {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-        }
-
-        .case-card {
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 60px;
+            align-items: center;
             background: var(--bg-surface);
             border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 40px;
-            transition: all 0.4s ease;
+            border-radius: 20px;
+            padding: 50px;
+            position: relative;
+            overflow: hidden;
         }
 
-        .case-card:hover {
-            border-color: var(--accent);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        .network-band::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 500px;
+            height: 500px;
+            background: var(--gradient-glow);
+            filter: blur(80px);
+            pointer-events: none;
         }
 
-        .case-metric {
+        .network-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .network-content h2 {
+            font-size: clamp(28px, 4vw, 40px);
+            margin-bottom: 16px;
+        }
+
+        .network-content p {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            max-width: 520px;
+        }
+
+        .network-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .network-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .network-chip i {
+            color: var(--primary);
+        }
+
+        .network-side {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .network-side .network-stat {
             font-family: 'Playfair Display', serif;
-            font-size: 48px;
-            font-weight: 700;
+            font-size: 56px;
+            font-weight: 800;
             color: var(--primary);
             line-height: 1;
-            margin-bottom: 15px;
         }
 
-        .case-title {
-            font-size: 20px;
-            margin-bottom: 20px;
-            line-height: 1.3;
-        }
-
-        .case-list {
-            list-style: none;
-        }
-
-        .case-list li {
+        .network-side .network-stat-label {
             font-size: 14px;
             color: var(--text-muted);
-            margin-bottom: 10px;
-            padding-left: 20px;
-            position: relative;
+            margin-top: 8px;
         }
 
-        .case-list li::before {
-            content: '•';
-            position: absolute;
-            left: 0;
-            color: var(--accent);
-            font-size: 18px;
-            line-height: 1;
+        @media (max-width: 992px) {
+            .network-band {
+                grid-template-columns: 1fr;
+                padding: 40px 30px;
+                text-align: center;
+            }
+
+            .network-chips {
+                justify-content: center;
+            }
+
+            .network-content p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
+        /* Also worked with */
+        .portfolio-more {
+            margin-top: 60px;
+            text-align: center;
+            padding: 30px;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            background: var(--bg-surface);
+        }
+
+        .portfolio-more h4 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        .portfolio-more-brands {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 20px 40px;
+        }
+
+        /* Larger than hero logos: export at 80px height (2x), display at 40px */
+        .portfolio-more-brands .brand-logo {
+            height: 40px;
+            max-width: 160px;
         }
 
         /* Contact Section */
@@ -1222,14 +1441,30 @@
             cursor: pointer;
         }
 
+        /* Scroll Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+
         /* Responsive */
         @media (max-width: 1200px) {
-            .services-grid, .system-grid, .portfolio-grid, .cases-grid {
+            .services-grid, .system-grid, .portfolio-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
 
-            .workflows-grid {
-                grid-template-columns: repeat(3, 1fr);
+            .tools-grid {
+                grid-template-columns: repeat(4, 1fr);
             }
 
             .authority-grid {
@@ -1252,15 +1487,15 @@
                 order: 1;
             }
 
-            .hero-problem {
-                margin: 0 auto 40px;
-                border-left: none;
-                border-top: 2px solid var(--accent);
-                padding-left: 0;
-                padding-top: 20px;
+            .hero-cta {
+                justify-content: center;
             }
 
-            .hero-cta {
+            .hero-trust {
+                margin: 0 auto;
+            }
+
+            .hero-trust-brands {
                 justify-content: center;
             }
 
@@ -1286,12 +1521,12 @@
                 padding: 0 20px;
             }
 
-            .services-grid, .system-grid, .portfolio-grid, .cases-grid, .problems-grid {
+            .services-grid, .system-grid, .portfolio-grid {
                 grid-template-columns: 1fr;
             }
 
-            .workflows-grid {
-                grid-template-columns: repeat(2, 1fr);
+            .tools-grid {
+                grid-template-columns: repeat(3, 1fr);
             }
 
             .authority-grid {
@@ -1313,155 +1548,15 @@
             }
         }
 
-        /* Tools Section */
-        #tools {
-            background: var(--bg-primary);
-        }
-
-        .tools-grid {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 20px;
-        }
-
-        .tool-item {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 30px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-            transition: all 0.4s ease;
-            cursor: default;
-        }
-
-        .tool-item:hover {
-            border-color: var(--accent);
-            transform: translateX(10px);
-            background: var(--bg-surface);
-            box-shadow: 0 10px 40px rgba(245, 158, 11, 0.1);
-        }
-
-        .tool-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--bg-surface);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            color: var(--primary);
-            transition: all 0.4s ease;
-        }
-
-        .tool-item:hover .tool-icon {
-            background: var(--gradient-primary);
-            color: var(--bg-primary);
-            transform: scale(1.1);
-        }
-
-        .tool-name {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-primary);
-            text-align: center;
-        }
-
-        .tool-category {
-            font-size: 11px;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .tools-categories {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 50px;
-            flex-wrap: wrap;
-        }
-
-        .tools-category-btn {
-            padding: 10px 24px;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: 50px;
-            font-family: 'Outfit', sans-serif;
-            font-size: 13px;
-            font-weight: 500;
-            color: var(--text-secondary);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .tools-category-btn:hover,
-        .tools-category-btn.active {
-            background: var(--gradient-primary);
-            border-color: var(--primary);
-            color: var(--bg-primary);
-        }
-
-        @media (max-width: 1200px) {
-            .tools-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .tools-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-
-            .tool-item {
-                padding: 20px 15px;
-            }
-
-            .tool-icon {
-                width: 50px;
-                height: 50px;
-                font-size: 24px;
-            }
-
-            .tool-name {
-                font-size: 12px;
-            }
-        }
-
         @media (max-width: 480px) {
             .tools-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
-
-        /* Scroll Animations */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
-
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .reveal-delay-1 { transition-delay: 0.1s; }
-        .reveal-delay-2 { transition-delay: 0.2s; }
-        .reveal-delay-3 { transition-delay: 0.3s; }
-        .reveal-delay-4 { transition-delay: 0.4s; }
-        .reveal-delay-5 { transition-delay: 0.5s; }
     </style>
 </head>
 <body>
-    <!-- Loading Overlay -->
-    <div class="loading-overlay" id="loadingOverlay">
-        <div class="loader"></div>
-        <span class="loader-text">Loading</span>
-    </div>
+    <div class="scroll-progress" id="scrollProgress"></div>
 
     <!-- Navigation -->
     <nav id="navbar">
@@ -1471,11 +1566,11 @@
                 <a href="#hero" class="nav-link active">Home</a>
                 <a href="#services" class="nav-link">Services</a>
                 <a href="#system" class="nav-link">System</a>
-                <a href="#tools" class="nav-link">Tools</a>
                 <a href="#portfolio" class="nav-link">Portfolio</a>
+                <a href="#network" class="nav-link">Network</a>
                 <a href="#contact" class="nav-link">Contact</a>
             </div>
-            <button class="nav-mobile-toggle" id="mobileToggle">
+            <button class="nav-mobile-toggle" id="mobileToggle" aria-label="Open menu">
                 <i class="ri-menu-line"></i>
             </button>
         </div>
@@ -1483,13 +1578,12 @@
 
     <!-- Mobile Navigation -->
     <div class="mobile-nav" id="mobileNav">
-        <button class="mobile-nav-close" id="mobileClose">
+        <button class="mobile-nav-close" id="mobileClose" aria-label="Close menu">
             <i class="ri-close-line"></i>
         </button>
         <a href="#hero" class="nav-link">Home</a>
         <a href="#services" class="nav-link">Services</a>
         <a href="#system" class="nav-link">System</a>
-        <a href="#tools" class="nav-link">Tools</a>
         <a href="#portfolio" class="nav-link">Portfolio</a>
         <a href="#contact" class="nav-link">Contact</a>
     </div>
@@ -1502,23 +1596,24 @@
                 <div class="hero-text">
                     <div class="hero-badge">Available for Projects</div>
                     <h1 class="hero-title">
-                        RHO<span>MURL</span>
+                        Communities that <span>run themselves.</span>
                     </h1>
                     <p class="hero-subtitle">
-                        AI Automation & Community Operations Specialist for High-Growth Coaches, Startups, and Web3 Teams
-                    </p>
-                    <p class="hero-problem">
-                        Most communities fail for two reasons: They depend on human effort, and they run on broken systems. I fix that by building automated, scalable community infrastructures that reduce manual workload, reinforce culture, eliminate chaos, and turn communities into predictable assets—not liabilities.
+                        I'm <strong>Rhomuel</strong> (RHOMURL). I build AI automation and operations systems for coaches, startups, and Web3 teams, removing <strong>60+ hours of manual work every month</strong> so your community grows without burning out your team.
                     </p>
                     <div class="hero-cta">
-                        <a href="https://calendly.com/rhomurl/30min" target="_blank" class="btn btn-primary">
+                        <a href="https://calendly.com/rhomurl/30min" target="_blank" rel="noopener" class="btn btn-primary">
                             <i class="ri-calendar-line"></i>
                             Book a Strategy Call
                         </a>
-                        <a href="#services" class="btn btn-secondary">
+                        <a href="#portfolio" class="btn btn-secondary">
                             <i class="ri-arrow-down-line"></i>
-                            View My Systems
+                            See the Results
                         </a>
+                    </div>
+                    <div class="hero-trust">
+                        <div class="hero-trust-label">Trusted by teams at</div>
+                        <div class="hero-trust-brands" id="heroTrustBrands"></div>
                     </div>
                 </div>
                 <div class="hero-image">
@@ -1563,7 +1658,7 @@
                 <span class="section-label">What I Do</span>
                 <h2 class="section-title">Three Pillars of Growth</h2>
                 <p class="section-subtitle">
-                    High-performing communities scale through systems—not moderators. Here's how I help you build that infrastructure.
+                    High-performing communities scale through systems, not moderators. Here's how I help you build that infrastructure.
                 </p>
             </div>
 
@@ -1580,10 +1675,9 @@
                     <ul class="service-list">
                         <li>AI support agents (Discord, Telegram, Web)</li>
                         <li>Automated onboarding & qualification flows</li>
-                        <li>CRM workflows for coaches/startups</li>
+                        <li>CRM workflows for coaches & startups</li>
                         <li>Ticketing + support automation</li>
                         <li>Custom bots (Node/Python)</li>
-                        <li>Event & content automation</li>
                         <li>Alerting + incident monitoring</li>
                     </ul>
                 </div>
@@ -1595,12 +1689,11 @@
                     <span class="service-badge">Secondary Focus</span>
                     <h3 class="service-title">Community Operations</h3>
                     <p class="service-description">
-                        AI handles the repetitive work. Ops systems handle the complexity. The outcome: Safer, cleaner, predictable communities that run without founder burnout.
+                        AI handles the repetitive work. Ops systems handle the complexity. The outcome: safer, cleaner, predictable communities that run without founder burnout.
                     </p>
                     <ul class="service-list">
                         <li>Multi-layer moderation structures</li>
                         <li>Anti-scam detection workflows</li>
-                        <li>Culture systems that reinforce behavior</li>
                         <li>Activation → retention pipelines</li>
                         <li>Event cadence systems</li>
                         <li>Incident response frameworks</li>
@@ -1620,72 +1713,11 @@
                     <ul class="service-list">
                         <li>Twitter/X threads & posts</li>
                         <li>Short-form video content</li>
-                        <li>Reply guy service (engagement)</li>
                         <li>Content calendar management</li>
                         <li>Brand voice development</li>
-                        <li>Community announcements</li>
                         <li>Educational content series</li>
                     </ul>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Problems Section -->
-    <section id="problems">
-        <div class="container">
-            <div class="section-header reveal">
-                <span class="section-label">The Reality</span>
-                <h2 class="section-title">Problems I Solve</h2>
-                <p class="section-subtitle">
-                    Most communities underperform because the systems behind them are broken.
-                </p>
-            </div>
-
-            <div class="problems-grid">
-                <div class="problem-card reveal">
-                    <div class="problem-number">01</div>
-                    <div class="problem-content">
-                        <h3>Everything is manual.</h3>
-                        <p>Manual onboarding, manual support, manual moderation = bottlenecks. Your team spends hours on tasks that could run automatically.</p>
-                    </div>
-                </div>
-
-                <div class="problem-card reveal reveal-delay-1">
-                    <div class="problem-number">02</div>
-                    <div class="problem-content">
-                        <h3>CMs/mods lack operational depth.</h3>
-                        <p>Common hiring complaints: underqualified, unclear scope, low ROI, no metrics. You need operators, not just moderators.</p>
-                    </div>
-                </div>
-
-                <div class="problem-card reveal reveal-delay-2">
-                    <div class="problem-number">03</div>
-                    <div class="problem-content">
-                        <h3>Expecting growth, getting "engagement."</h3>
-                        <p>Engagement without infrastructure leads to churn, not retention. Chat activity means nothing without systems behind it.</p>
-                    </div>
-                </div>
-
-                <div class="problem-card reveal reveal-delay-3">
-                    <div class="problem-number">04</div>
-                    <div class="problem-content">
-                        <h3>Leaders misunderstand AI.</h3>
-                        <p>AI isn't magic. It's systems + logic + automation flows. Most teams don't know what they need or how to implement it.</p>
-                    </div>
-                </div>
-
-                <div class="problem-card reveal reveal-delay-4">
-                    <div class="problem-number">05</div>
-                    <div class="problem-content">
-                        <h3>Community safety is unstable.</h3>
-                        <p>Spam, scams, toxic behavior, and slow responses destroy culture. Without proper systems, your community is always at risk.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="problems-cta reveal">
-                <p>Fix these five, and your community becomes a <strong>growth engine</strong>—not a cost center.</p>
             </div>
         </div>
     </section>
@@ -1708,7 +1740,7 @@
                     </div>
                 </div>
                 <p class="section-subtitle">
-                    My proprietary hybrid framework used to build every client system. This ensures your community grows without increasing workload.
+                    The framework behind every client build. Your community grows without increasing workload.
                 </p>
             </div>
 
@@ -1722,9 +1754,8 @@
                         <h4>Deliverables</h4>
                         <ul>
                             <li>Auto-onboarding sequences</li>
-                            <li>Engagement loops</li>
+                            <li>Engagement loops & event cadence</li>
                             <li>Retention dashboards</li>
-                            <li>Event cadence systems</li>
                             <li>Member segmentation</li>
                         </ul>
                     </div>
@@ -1742,7 +1773,6 @@
                             <li>Anti-scam workflows</li>
                             <li>Incident detection bots</li>
                             <li>Escalation protocols</li>
-                            <li>Culture reinforcement cycles</li>
                         </ul>
                     </div>
                 </div>
@@ -1755,8 +1785,7 @@
                     <div class="system-deliverables">
                         <h4>Deliverables</h4>
                         <ul>
-                            <li>AI agents</li>
-                            <li>Support workflows</li>
+                            <li>AI agents & support workflows</li>
                             <li>CRM integrations</li>
                             <li>Founder productivity workflows</li>
                             <li>24/7 automated responses</li>
@@ -1774,192 +1803,11 @@
                 <span class="section-label">Tech Stack</span>
                 <h2 class="section-title">Tools & Technologies</h2>
                 <p class="section-subtitle">
-                    The platforms and technologies I use to build scalable community systems.
+                    The platforms I use to build and run scalable community systems.
                 </p>
             </div>
 
-            <div class="tools-categories reveal">
-                <button class="tools-category-btn active" onclick="filterTools('all')">All Tools</button>
-                <button class="tools-category-btn" onclick="filterTools('community')">Community</button>
-                <button class="tools-category-btn" onclick="filterTools('automation')">Automation</button>
-                <button class="tools-category-btn" onclick="filterTools('development')">Development</button>
-                <button class="tools-category-btn" onclick="filterTools('content')">Content</button>
-            </div>
-
-            <div class="tools-grid">
-                <!-- Community Tools -->
-                <div class="tool-item reveal" data-category="community">
-                    <div class="tool-icon"><i class="ri-discord-fill"></i></div>
-                    <span class="tool-name">Discord</span>
-                    <span class="tool-category">Community</span>
-                </div>
-
-                <div class="tool-item reveal reveal-delay-1" data-category="community">
-                    <div class="tool-icon"><i class="ri-telegram-fill"></i></div>
-                    <span class="tool-name">Telegram</span>
-                    <span class="tool-category">Community</span>
-                </div>
-
-                <div class="tool-item reveal reveal-delay-2" data-category="community">
-                    <div class="tool-icon"><i class="ri-slack-fill"></i></div>
-                    <span class="tool-name">Slack</span>
-                    <span class="tool-category">Community</span>
-                </div>
-
-                <div class="tool-item reveal reveal-delay-3" data-category="content">
-                    <div class="tool-icon"><i class="ri-edit-box-fill"></i></div>
-                    <span class="tool-name">Typefully</span>
-                    <span class="tool-category">Content</span>
-                </div>
-
-                <div class="tool-item reveal reveal-delay-4" data-category="automation">
-                    <div class="tool-icon"><i class="ri-openai-fill"></i></div>
-                    <span class="tool-name">ChatGPT</span>
-                    <span class="tool-category">Automation</span>
-                </div>
-
-                <div class="tool-item reveal reveal-delay-5" data-category="automation">
-                    <div class="tool-icon"><i class="ri-sparkling-fill"></i></div>
-                    <span class="tool-name">Claude AI</span>
-                    <span class="tool-category">Automation</span>
-                </div>
-
-                <!-- Automation Tools -->
-                <div class="tool-item reveal" data-category="automation">
-                    <div class="tool-icon"><i class="ri-flashlight-fill"></i></div>
-                    <span class="tool-name">Zapier</span>
-                    <span class="tool-category">Automation</span>
-                </div>
-
-                <div class="tool-item reveal reveal-delay-1" data-category="automation">
-                    <div class="tool-icon"><i class="ri-settings-3-fill"></i></div>
-                    <span class="tool-name">Make</span>
-                    <span class="tool-category">Automation</span>
-                </div>
-
-                <div class="tool-item reveal reveal-delay-2" data-category="automation">
-                    <div class="tool-icon"><i class="ri-flow-chart"></i></div>
-                    <span class="tool-name">n8n</span>
-                    <span class="tool-category">Automation</span>
-                </div>
-
-                <div class="tool-item reveal reveal-delay-3" data-category="automation">
-                    <div class="tool-icon"><i class="ri-database-2-fill"></i></div>
-                    <span class="tool-name">Airtable</span>
-                    <span class="tool-category">Automation</span>
-                </div>
-
-                <div class="tool-item reveal reveal-delay-4" data-category="automation">
-                    <div class="tool-icon"><i class="ri-file-list-3-fill"></i></div>
-                    <span class="tool-name">Notion</span>
-                    <span class="tool-category">Automation</span>
-                </div>
-
-                <div class="tool-item reveal reveal-delay-5" data-category="automation">
-                    <div class="tool-icon"><i class="ri-google-fill"></i></div>
-                    <span class="tool-name">Google Workspace</span>
-                    <span class="tool-category">Automation</span>
-                </div>
-
-                <div class="tool-item reveal" data-category="automation">
-                    <div class="tool-icon"><i class="ri-search-eye-fill"></i></div>
-                    <span class="tool-name">Perplexity</span>
-                    <span class="tool-category">Automation</span>
-                </div>
-
-                <div class="tool-item reveal reveal-delay-1" data-category="automation">
-                    <div class="tool-icon"><i class="ri-bookmark-fill"></i></div>
-                    <span class="tool-name">NotebookLM</span>
-                    <span class="tool-category">Automation</span>
-                </div>
-
-                <!-- Payment & Platform Tools -->
-                <div class="tool-item reveal reveal-delay-2" data-category="automation">
-                    <div class="tool-icon"><i class="ri-bank-card-fill"></i></div>
-                    <span class="tool-name">Stripe</span>
-                    <span class="tool-category">Automation</span>
-                </div>
-
-                <div class="tool-item reveal reveal-delay-3" data-category="automation">
-                    <div class="tool-icon"><i class="ri-graduation-cap-fill"></i></div>
-                    <span class="tool-name">Kajabi</span>
-                    <span class="tool-category">Automation</span>
-                </div>
-
-                <!-- Development Tools -->
-                <div class="tool-item reveal reveal-delay-4" data-category="development">
-                    <div class="tool-icon"><i class="ri-nodejs-fill"></i></div>
-                    <span class="tool-name">Node.js</span>
-                    <span class="tool-category">Development</span>
-                </div>
-
-                <div class="tool-item reveal reveal-delay-5" data-category="development">
-                    <div class="tool-icon"><i class="ri-code-s-slash-fill"></i></div>
-                    <span class="tool-name">Python</span>
-                    <span class="tool-category">Development</span>
-                </div>
-
-                <div class="tool-item reveal" data-category="development">
-                    <div class="tool-icon"><i class="ri-code-box-fill"></i></div>
-                    <span class="tool-name">PHP</span>
-                    <span class="tool-category">Development</span>
-                </div>
-
-                <div class="tool-item reveal reveal-delay-1" data-category="development">
-                    <div class="tool-icon"><i class="ri-global-fill"></i></div>
-                    <span class="tool-name">WordPress</span>
-                    <span class="tool-category">Development</span>
-                </div>
-
-                <div class="tool-item reveal reveal-delay-2" data-category="development">
-                    <div class="tool-icon"><i class="ri-braces-fill"></i></div>
-                    <span class="tool-name">REST APIs</span>
-                    <span class="tool-category">Development</span>
-                </div>
-
-                <div class="tool-item reveal reveal-delay-3" data-category="development">
-                    <div class="tool-icon"><i class="ri-send-plane-fill"></i></div>
-                    <span class="tool-name">Postman</span>
-                    <span class="tool-category">Development</span>
-                </div>
-
-                <div class="tool-item reveal reveal-delay-4" data-category="development">
-                    <div class="tool-icon"><i class="ri-server-fill"></i></div>
-                    <span class="tool-name">Heroku</span>
-                    <span class="tool-category">Development</span>
-                </div>
-
-                <!-- Content Tools -->
-                <div class="tool-item reveal reveal-delay-5" data-category="content">
-                    <div class="tool-icon"><i class="ri-palette-fill"></i></div>
-                    <span class="tool-name">Canva</span>
-                    <span class="tool-category">Content</span>
-                </div>
-
-                <div class="tool-item reveal" data-category="content">
-                    <div class="tool-icon"><i class="ri-film-fill"></i></div>
-                    <span class="tool-name">Premiere Pro</span>
-                    <span class="tool-category">Content</span>
-                </div>
-
-                <div class="tool-item reveal reveal-delay-1" data-category="content">
-                    <div class="tool-icon"><i class="ri-image-edit-fill"></i></div>
-                    <span class="tool-name">Photoshop</span>
-                    <span class="tool-category">Content</span>
-                </div>
-
-                <div class="tool-item reveal reveal-delay-2" data-category="content">
-                    <div class="tool-icon"><i class="ri-video-fill"></i></div>
-                    <span class="tool-name">CapCut</span>
-                    <span class="tool-category">Content</span>
-                </div>
-
-                <div class="tool-item reveal reveal-delay-3" data-category="content">
-                    <div class="tool-icon"><i class="ri-youtube-fill"></i></div>
-                    <span class="tool-name">YouTube</span>
-                    <span class="tool-category">Content</span>
-                </div>
-            </div>
+            <div class="tools-grid" id="toolsGrid"></div>
         </div>
     </section>
 
@@ -1970,463 +1818,55 @@
                 <span class="section-label">Portfolio</span>
                 <h2 class="section-title">Projects & Results</h2>
                 <p class="section-subtitle">
-                    From Web3 gaming to AI automation—real systems built, real results delivered across 12+ projects.
+                    Real systems built, real results delivered across 12+ projects.
                 </p>
             </div>
 
-            <div class="portfolio-grid">
-                <!-- Base Philippines -->
-                <div class="portfolio-card featured reveal">
-                    <div class="portfolio-image">
-                        <img src="https://www.base.org/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcore.831219b6.png&w=1080&q=99" alt="Base Philippines">
-                    </div>
-                    <div class="portfolio-content">
-                        <div class="portfolio-company">Base Philippines</div>
-                        <h3 class="portfolio-title">Contributor</h3>
-                        <div class="portfolio-results">
-                            <h4>Results</h4>
-                            <ul>
-                                <li>Awarded Based Builder Spirit Award (May 2025)</li>
-                                <li>Facilitated Base Ecosystem group discussions</li>
-                                <li>Hosted 3 Base Events with 200+ attendees</li>
-                                <li>PH Based Voices creator (Aug 2025)</li>
-                            </ul>
-                        </div>
-                        <div class="portfolio-systems">
-                            <h4>Focus Areas</h4>
-                            <div class="portfolio-tags">
-                                <span class="portfolio-tag">Content Creation</span>
-                                <span class="portfolio-tag">Event Management</span>
-                                <span class="portfolio-tag">Community Engagement</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="portfolio-grid" id="portfolioGrid"></div>
 
-                <!-- BlockchainSpace -->
-                <div class="portfolio-card featured reveal reveal-delay-1">
-                    <div class="portfolio-image">
-                        <img src="https://pbs.twimg.com/profile_banners/1690933410838261760/1732541294/1500x500" alt="BlockchainSpace">
-                    </div>
-                    <div class="portfolio-content">
-                        <div class="portfolio-company">BlockchainSpace / YEY.tech</div>
-                        <h3 class="portfolio-title">BizDev Associate → Lead Mod → Bot Master</h3>
-                        <div class="portfolio-results">
-                            <h4>Results</h4>
-                            <ul>
-                                <li>Grew community by 2,000+ unique members</li>
-                                <li>334+ active communicators achieved</li>
-                                <li>Supervised team of 4 moderators</li>
-                                <li>Secured podcast guests & whitelist spots</li>
-                            </ul>
-                        </div>
-                        <div class="portfolio-systems">
-                            <h4>Systems Built</h4>
-                            <div class="portfolio-tags">
-                                <span class="portfolio-tag">Bot Management</span>
-                                <span class="portfolio-tag">Bilingual Support</span>
-                                <span class="portfolio-tag">Event Coordination</span>
-                                <span class="portfolio-tag">Team Leadership</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Confidential -->
-                <div class="portfolio-card featured confidential reveal reveal-delay-2">
-                    <div class="portfolio-image">
-                        <img src="https://placehold.co/600x400/1f1f1f/737373?text=Confidential" alt="Confidential Client">
-                    </div>
-                    <div class="portfolio-content">
-                        <div class="portfolio-company">🔒 Confidential Client</div>
-                        <h3 class="portfolio-title">AI Automation Specialist</h3>
-                        <div class="portfolio-results">
-                            <h4>Results</h4>
-                            <ul>
-                                <li>Custom AI workflow development</li>
-                                <li>Automation systems implementation</li>
-                                <li>Process optimization & scaling</li>
-                                <li>30-60 hours/month operational savings</li>
-                            </ul>
-                        </div>
-                        <div class="portfolio-systems">
-                            <h4>Systems Built</h4>
-                            <div class="portfolio-tags">
-                                <span class="portfolio-tag">AI Agents</span>
-                                <span class="portfolio-tag">Workflow Automation</span>
-                                <span class="portfolio-tag">Custom Bots</span>
-                                <span class="portfolio-tag">CRM Integration</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Galaxy Fight Club -->
-                <div class="portfolio-card reveal reveal-delay-2">
-                    <div class="portfolio-image">
-                        <img src="https://assets.gam3s.gg/Galaxy_Fight_Club_Review_Meta_Image_ecafe54c55.png" alt="Galaxy Fight Club">
-                    </div>
-                    <div class="portfolio-content">
-                        <div class="portfolio-company">Galaxy Fight Club</div>
-                        <h3 class="portfolio-title">Social Media Manager</h3>
-                        <div class="portfolio-results">
-                            <h4>Results</h4>
-                            <ul>
-                                <li>Weekly impressions: 8k → 20k+</li>
-                                <li>Engagement rate: 2-3% → 6%</li>
-                                <li>Developed bilingual content strategy</li>
-                                <li>Cross-IP PvP NFT game partnerships</li>
-                            </ul>
-                        </div>
-                        <div class="portfolio-systems">
-                            <h4>Focus Areas</h4>
-                            <div class="portfolio-tags">
-                                <span class="portfolio-tag">Content Strategy</span>
-                                <span class="portfolio-tag">Analytics</span>
-                                <span class="portfolio-tag">Video Editing</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- SAINTS OF LA -->
-                <div class="portfolio-card reveal">
-                    <div class="portfolio-image">
-                        <img src="https://shopsaints.xyz/cdn/shop/files/NFT.png?v=1729344863&width=1500" alt="SAINTS OF LA">
-                    </div>
-                    <div class="portfolio-content">
-                        <div class="portfolio-company">SAINTS OF LA</div>
-                        <h3 class="portfolio-title">Community Mod & Discord Security</h3>
-                        <div class="portfolio-results">
-                            <h4>Results</h4>
-                            <ul>
-                                <li>Community growth: 200 → 2,500+ members</li>
-                                <li>Managed 500+ support tickets</li>
-                                <li>Top-tier security during minting</li>
-                                <li>Safeguarded community interests</li>
-                            </ul>
-                        </div>
-                        <div class="portfolio-systems">
-                            <h4>Focus Areas</h4>
-                            <div class="portfolio-tags">
-                                <span class="portfolio-tag">Discord Security</span>
-                                <span class="portfolio-tag">Minting Support</span>
-                                <span class="portfolio-tag">Community Growth</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Ancient8 -->
-                <div class="portfolio-card reveal">
-                    <div class="portfolio-image">
-                        <img src="https://ancient8.gg/images/thumbnail.jpg" alt="Ancient8">
-                    </div>
-                    <div class="portfolio-content">
-                        <div class="portfolio-company">Ancient8</div>
-                        <h3 class="portfolio-title">Ambassador & Content Creator</h3>
-                        <div class="portfolio-results">
-                            <h4>Results</h4>
-                            <ul>
-                                <li>Brand ambassador representation</li>
-                                <li>Content creation for Web3 gaming</li>
-                                <li>Community engagement initiatives</li>
-                                <li>Educational content development</li>
-                            </ul>
-                        </div>
-                        <div class="portfolio-systems">
-                            <h4>Focus Areas</h4>
-                            <div class="portfolio-tags">
-                                <span class="portfolio-tag">Content Creation</span>
-                                <span class="portfolio-tag">Brand Advocacy</span>
-                                <span class="portfolio-tag">Community Growth</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- CoreDAO -->
-                <div class="portfolio-card reveal reveal-delay-1">
-                    <div class="portfolio-image">
-                        <img src="https://iq.wiki/cdn-cgi/image/width=1200,quality=95/https://ipfs.everipedia.org/ipfs/QmVYi5czjoDwDtnufAv3e2GpdxrGpMkRxyfukzPJA6ucmR" alt="CoreDAO">
-                    </div>
-                    <div class="portfolio-content">
-                        <div class="portfolio-company">CoreDAO</div>
-                        <h3 class="portfolio-title">Ambassador</h3>
-                        <div class="portfolio-results">
-                            <h4>Results</h4>
-                            <ul>
-                                <li>Blockchain ecosystem advocacy</li>
-                                <li>Community education & support</li>
-                                <li>Twitter/X space guesting</li>
-                                <li>Network expansion initiatives</li>
-                            </ul>
-                        </div>
-                        <div class="portfolio-systems">
-                            <h4>Focus Areas</h4>
-                            <div class="portfolio-tags">
-                                <span class="portfolio-tag">Ambassador Program</span>
-                                <span class="portfolio-tag">Community Education</span>
-                                <span class="portfolio-tag">Ecosystem Growth</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Lootify -->
-                <div class="portfolio-card reveal reveal-delay-2">
-                    <div class="portfolio-image">
-                        <img src="https://pbs.twimg.com/profile_banners/1848817679244681217/1729678185/1500x500" alt="Lootify">
-                    </div>
-                    <div class="portfolio-content">
-                        <div class="portfolio-company">Lootify</div>
-                        <h3 class="portfolio-title">Community Moderator</h3>
-                        <div class="portfolio-results">
-                            <h4>Results</h4>
-                            <ul>
-                                <li>Community moderation & support</li>
-                                <li>User engagement management</li>
-                                <li>Ticket support handling</li>
-                                <li>Community guidelines enforcement</li>
-                            </ul>
-                        </div>
-                        <div class="portfolio-systems">
-                            <h4>Focus Areas</h4>
-                            <div class="portfolio-tags">
-                                <span class="portfolio-tag">Moderation</span>
-                                <span class="portfolio-tag">User Support</span>
-                                <span class="portfolio-tag">Community Safety</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Pukecast -->
-                <div class="portfolio-card reveal">
-                    <div class="portfolio-image">
-                        <img src="https://i.scdn.co/image/ab6765630000ba8af4836f0209814da61fb1ebe8" alt="Pukecast">
-                    </div>
-                    <div class="portfolio-content">
-                        <div class="portfolio-company">Pukecast</div>
-                        <h3 class="portfolio-title">Lead Generator | Twitter/X</h3>
-                        <div class="portfolio-results">
-                            <h4>Results</h4>
-                            <ul>
-                                <li>Cold messaging campaigns across chains</li>
-                                <li>Reply guy for Twitter/X account</li>
-                                <li>Compiled web3 project records</li>
-                                <li>Streamlined lead generation processes</li>
-                            </ul>
-                        </div>
-                        <div class="portfolio-systems">
-                            <h4>Focus Areas</h4>
-                            <div class="portfolio-tags">
-                                <span class="portfolio-tag">Lead Generation</span>
-                                <span class="portfolio-tag">Outreach</span>
-                                <span class="portfolio-tag">Data Management</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Erovoutika -->
-                <div class="portfolio-card reveal reveal-delay-1">
-                    <div class="portfolio-image">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-mKWsl2e_Ug8qhr-fWRWrbVIypEh1VOaHMw&s" alt="Erovoutika">
-                    </div>
-                    <div class="portfolio-content">
-                        <div class="portfolio-company">Erovoutika</div>
-                        <h3 class="portfolio-title">IT Intern & Security Researcher</h3>
-                        <div class="portfolio-results">
-                            <h4>Results</h4>
-                            <ul>
-                                <li>Created HTML/CSS video tutorials</li>
-                                <li>Managed YouTube & Facebook pages</li>
-                                <li>Technical Head for eVIP Awards</li>
-                                <li>Fixed website vulnerabilities</li>
-                            </ul>
-                        </div>
-                        <div class="portfolio-systems">
-                            <h4>Focus Areas</h4>
-                            <div class="portfolio-tags">
-                                <span class="portfolio-tag">Web Development</span>
-                                <span class="portfolio-tag">Video Production</span>
-                                <span class="portfolio-tag">Security Research</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Burning Dragons -->
-                <div class="portfolio-card reveal reveal-delay-2">
-                    <div class="portfolio-image">
-                        <img src="https://pbs.twimg.com/profile_banners/1531858885006749697/1656670342/1500x500" alt="Burning Dragons">
-                    </div>
-                    <div class="portfolio-content">
-                        <div class="portfolio-company">Burning Dragons</div>
-                        <h3 class="portfolio-title">Community Moderator</h3>
-                        <div class="portfolio-results">
-                            <h4>Results</h4>
-                            <ul>
-                                <li>Managed 50 tickets during NFT minting</li>
-                                <li>Developed bilingual event scripts</li>
-                                <li>Configured bots & server channels</li>
-                                <li>Ensured accurate translations</li>
-                            </ul>
-                        </div>
-                        <div class="portfolio-systems">
-                            <h4>Focus Areas</h4>
-                            <div class="portfolio-tags">
-                                <span class="portfolio-tag">Bot Configuration</span>
-                                <span class="portfolio-tag">NFT Support</span>
-                                <span class="portfolio-tag">Bilingual Content</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- AXCS Vision Guild -->
-                <div class="portfolio-card reveal reveal-delay-1">
-                    <div class="portfolio-image">
-                        <img src="https://placehold.co/600x400/1f1f1f/f59e0b?text=AXCS+Vision+Guild" alt="AXCS Vision Guild">
-                    </div>
-                    <div class="portfolio-content">
-                        <div class="portfolio-company">AXCS Vision Guild</div>
-                        <h3 class="portfolio-title">Guild Leader & Founder</h3>
-                        <div class="portfolio-results">
-                            <h4>Results</h4>
-                            <ul>
-                                <li>Founded & led 70+ scholar community</li>
-                                <li>Resolved 200+ support tickets</li>
-                                <li>Bilingual support (Tagalog/English)</li>
-                                <li>Axie Infinity ecosystem management</li>
-                            </ul>
-                        </div>
-                        <div class="portfolio-systems">
-                            <h4>Systems Built</h4>
-                            <div class="portfolio-tags">
-                                <span class="portfolio-tag">Onboarding Flows</span>
-                                <span class="portfolio-tag">Cashout Pipeline</span>
-                                <span class="portfolio-tag">Scholar Management</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+            <div class="portfolio-more reveal">
+                <h4>Also worked with</h4>
+                <div class="portfolio-more-brands" id="moreBrands"></div>
             </div>
         </div>
     </section>
 
-    <!-- Workflows Section -->
-    <section id="workflows">
+    <!-- Network Section -->
+    <section id="network">
         <div class="container">
-            <div class="section-header reveal">
-                <span class="section-label">Deliverables</span>
-                <h2 class="section-title">Workflow Systems Included</h2>
-                <p class="section-subtitle">
-                    Each system is designed to reduce workload, eliminate chaos, and turn community growth into a predictable outcome.
-                </p>
-            </div>
-
-            <div class="workflows-grid">
-                <div class="workflow-item reveal">
-                    <div class="workflow-icon"><i class="ri-user-add-line"></i></div>
-                    <h4>Onboarding Automation Flow</h4>
+            <div class="network-band reveal">
+                <div class="network-content">
+                    <span class="section-label">The Network</span>
+                    <h2>Looking for creators or guilds in Web3 gaming?</h2>
+                    <p>
+                        Four years across PH Web3 means I know who actually delivers. If you're launching a game or campaign and need vetted partners, I'll make the intro. No agency markup, no cold outreach roulette.
+                    </p>
+                    <div class="network-chips">
+                        <span class="network-chip"><i class="ri-mic-line"></i> Content Creators & KOLs</span>
+                        <span class="network-chip"><i class="ri-sword-line"></i> Gaming Guilds</span>
+                        <span class="network-chip"><i class="ri-team-line"></i> Community & Event Partners</span>
+                    </div>
+                    <a href="https://t.me/rhomurl" target="_blank" rel="noopener" class="btn btn-secondary">
+                        <i class="ri-telegram-fill"></i>
+                        Ask for an Intro
+                    </a>
                 </div>
-                <div class="workflow-item reveal reveal-delay-1">
-                    <div class="workflow-icon"><i class="ri-customer-service-line"></i></div>
-                    <h4>Support Ticket Automation</h4>
-                </div>
-                <div class="workflow-item reveal reveal-delay-2">
-                    <div class="workflow-icon"><i class="ri-shield-user-line"></i></div>
-                    <h4>Moderation Escalation Ladder</h4>
-                </div>
-                <div class="workflow-item reveal reveal-delay-3">
-                    <div class="workflow-icon"><i class="ri-alarm-warning-line"></i></div>
-                    <h4>Incident Response Workflow</h4>
-                </div>
-                <div class="workflow-item reveal reveal-delay-4">
-                    <div class="workflow-icon"><i class="ri-spam-line"></i></div>
-                    <h4>Anti-Scam Detection System</h4>
-                </div>
-                <div class="workflow-item reveal">
-                    <div class="workflow-icon"><i class="ri-loop-left-line"></i></div>
-                    <h4>Engagement Cycle Framework</h4>
-                </div>
-                <div class="workflow-item reveal reveal-delay-1">
-                    <div class="workflow-icon"><i class="ri-bar-chart-box-line"></i></div>
-                    <h4>Sentiment Tracking Dashboard</h4>
-                </div>
-                <div class="workflow-item reveal reveal-delay-2">
-                    <div class="workflow-icon"><i class="ri-calendar-event-line"></i></div>
-                    <h4>Event Cadence System</h4>
-                </div>
-                <div class="workflow-item reveal reveal-delay-3">
-                    <div class="workflow-icon"><i class="ri-flashlight-line"></i></div>
-                    <h4>Founder Productivity Automations</h4>
-                </div>
-                <div class="workflow-item reveal reveal-delay-4">
-                    <div class="workflow-icon"><i class="ri-links-line"></i></div>
-                    <h4>CRM Integration Pipeline</h4>
-                </div>
-            </div>
-
-            <p class="workflows-note reveal">
-                All systems are customized to your specific community needs and tech stack.
-            </p>
-        </div>
-    </section>
-
-    <!-- Case Studies Section -->
-    <section id="cases">
-        <div class="container">
-            <div class="section-header reveal">
-                <span class="section-label">Case Studies</span>
-                <h2 class="section-title">Micro Results</h2>
-                <p class="section-subtitle">
-                    Quick wins and transformations from real projects.
-                </p>
-            </div>
-
-            <div class="cases-grid">
-                <div class="case-card reveal">
-                    <div class="case-metric">+350</div>
-                    <h3 class="case-title">Weekly Communicators Increase</h3>
-                    <ul class="case-list">
-                        <li>Installed structured engagement cycles</li>
-                        <li>Automated mod tasks</li>
-                        <li>Increased response speeds using support workflows</li>
-                        <li>Stabilized event participation</li>
-                        <li>Simplified onboarding friction</li>
-                    </ul>
-                </div>
-
-                <div class="case-card reveal reveal-delay-1">
-                    <div class="case-metric">60%</div>
-                    <h3 class="case-title">Repetitive Operations Automated</h3>
-                    <ul class="case-list">
-                        <li>Built custom Discord workflow automation</li>
-                        <li>Auto-ticketing + auto-verification</li>
-                        <li>Incident alerts system</li>
-                        <li>Founder productivity automations</li>
-                        <li>Removed 20-30 hours/week of manual tasks</li>
-                    </ul>
-                </div>
-
-                <div class="case-card reveal reveal-delay-2">
-                    <div class="case-metric">100%</div>
-                    <h3 class="case-title">Community Stability Achieved</h3>
-                    <ul class="case-list">
-                        <li>Built anti-scam system</li>
-                        <li>Introduced moderation ladder</li>
-                        <li>Automated incident detection</li>
-                        <li>Reinforced culture expectations</li>
-                        <li>Increased sentiment stability</li>
-                    </ul>
+                <div class="network-side">
+                    <div class="network-stat">70+</div>
+                    <div class="network-stat-label">Scholars led in my own guild, plus a network built across 12+ Web3 projects</div>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightboxClose" aria-label="Close">
+            <i class="ri-close-line"></i>
+        </button>
+        <img src="" alt="" id="lightboxImg">
+        <div class="lightbox-caption" id="lightboxCaption"></div>
+    </div>
 
     <!-- Contact Section -->
     <section id="contact">
@@ -2443,27 +1883,23 @@
 
                 <div class="contact-cta reveal">
                     <div class="contact-buttons">
-                        <a href="https://calendly.com/rhomurl/30min" target="_blank" class="btn btn-primary">
+                        <a href="https://calendly.com/rhomurl/30min" target="_blank" rel="noopener" class="btn btn-primary">
                             <i class="ri-calendar-line"></i>
                             Book a Strategy Call
-                        </a>
-                        <a href="#services" class="btn btn-secondary">
-                            <i class="ri-eye-line"></i>
-                            View My Systems
                         </a>
                     </div>
 
                     <div class="contact-socials">
-                        <a href="https://twitter.com/rhomurl" target="_blank" class="social-link" title="Twitter/X">
+                        <a href="https://twitter.com/rhomurl" target="_blank" rel="noopener" class="social-link" title="Twitter/X">
                             <i class="ri-twitter-x-line"></i>
                         </a>
-                        <a href="https://linkedin.com/in/rhomurl" target="_blank" class="social-link" title="LinkedIn">
+                        <a href="https://linkedin.com/in/rhomurl" target="_blank" rel="noopener" class="social-link" title="LinkedIn">
                             <i class="ri-linkedin-fill"></i>
                         </a>
-                        <a href="https://tiktok.com/@rhomurl" target="_blank" class="social-link" title="TikTok">
+                        <a href="https://tiktok.com/@rhomurl" target="_blank" rel="noopener" class="social-link" title="TikTok">
                             <i class="ri-tiktok-fill"></i>
                         </a>
-                        <a href="https://t.me/rhomurl" target="_blank" class="social-link" title="Telegram">
+                        <a href="https://t.me/rhomurl" target="_blank" rel="noopener" class="social-link" title="Telegram">
                             <i class="ri-telegram-fill"></i>
                         </a>
                     </div>
@@ -2481,104 +1917,388 @@
 
     <!-- Footer -->
     <footer>
-        <p>© 2025 RHOMURL. Building Systems That Scale.</p>
+        <p>© 2026 RHOMURL. Building Systems That Scale.</p>
     </footer>
 
     <script>
-        // Loading Screen
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.getElementById('loadingOverlay').classList.add('hidden');
-            }, 1200);
+
+        /* ================================================================
+           SITE DATA — edit these arrays to update the page.
+           Adding a project = adding an object. No markup surgery needed.
+           ================================================================ */
+
+        const trustLogos = [
+            // Hero strip. Files: transparent PNG/SVG, 64px tall (displays at 32px)
+            { name: 'Base Philippines',  src: 'assets/logos/base.png' },
+            { name: 'BlockchainSpace',   src: 'assets/logos/blockchainspace.png' },
+            { name: 'Ancient8',          src: 'assets/logos/ancient8.png' },
+            { name: 'CoreDAO',           src: 'assets/logos/coredao.png' },
+            { name: 'Galaxy Fight Club', src: 'assets/logos/galaxy-fight-club.png' },
+        ];
+
+        const moreLogos = [
+            // "Also worked with" strip. Files: 80px tall (displays at 40px)
+            { name: 'Ancient8',        src: 'assets/logos/ancient8.png' },
+            { name: 'CoreDAO',         src: 'assets/logos/coredao.png' },
+            { name: 'Lootify',         src: 'assets/logos/lootify.png' },
+            { name: 'Burning Dragons', src: 'assets/logos/burning-dragons.png' },
+            { name: 'Pukecast',        src: 'assets/logos/pukecast.png' },
+            { name: 'Erovoutika',      src: 'assets/logos/erovoutika.png' },
+        ];
+
+        const tools = [
+            { name: 'n8n',        icon: 'ri-flow-chart',          category: 'Automation' },
+            { name: 'Make',       icon: 'ri-settings-3-fill',     category: 'Automation' },
+            { name: 'Zapier',     icon: 'ri-flashlight-fill',     category: 'Automation' },
+            { name: 'Claude AI',  icon: 'ri-sparkling-fill',      category: 'AI' },
+            { name: 'ChatGPT',    icon: 'ri-openai-fill',         category: 'AI' },
+            { name: 'Airtable',   icon: 'ri-database-2-fill',     category: 'Data' },
+            { name: 'Discord',    icon: 'ri-discord-fill',        category: 'Community' },
+            { name: 'Telegram',   icon: 'ri-telegram-fill',       category: 'Community' },
+            { name: 'Node.js',    icon: 'ri-nodejs-fill',         category: 'Development' },
+            { name: 'Python',     icon: 'ri-code-s-slash-fill',   category: 'Development' },
+            { name: 'REST APIs',  icon: 'ri-braces-fill',         category: 'Development' },
+            { name: 'Stripe',     icon: 'ri-bank-card-fill',      category: 'Payments' },
+        ];
+
+        const portfolio = [
+            {
+                company: 'Confidential Client (under NDA)',
+                title: 'AI Automation Specialist',
+                featured: true,
+                image: 'assets/portfolio/confidential.png',
+                fallback: 'AI',
+                results: [
+                    '60+ hours/month of manual operations removed',
+                    'Auto-ticketing, auto-verification & incident alerts',
+                    'Founder productivity automations',
+                    'Custom Discord workflow automation',
+                ],
+                proofTitle: 'Receipts',
+                proof: [
+                    { thumb: 'assets/proof/confidential/workflow-1-thumb.png', full: 'assets/proof/confidential/workflow-1-full.png', caption: 'n8n automation workflow (names redacted)' },
+                    { thumb: 'assets/proof/confidential/workflow-2-thumb.png', full: 'assets/proof/confidential/workflow-2-full.png', caption: 'Auto-ticketing flow (names redacted)' },
+                    { thumb: 'assets/proof/confidential/dashboard-thumb.png',  full: 'assets/proof/confidential/dashboard-full.png',  caption: 'Hours-saved tracking dashboard' },
+                ],
+                systemsTitle: 'Systems Built',
+                tags: ['AI Agents', 'n8n Workflows', 'Custom Bots', 'CRM Integration'],
+            },
+            {
+                company: 'BlockchainSpace / YEY.tech',
+                title: 'BizDev Associate → Lead Mod → Bot Master',
+                featured: true,
+                image: 'assets/portfolio/blockchainspace.jpg',
+                fallback: 'B',
+                results: [
+                    'Grew community by 2,000+ unique members',
+                    '334+ active weekly communicators achieved',
+                    'Supervised team of 4 moderators',
+                    'Secured podcast guests & whitelist spots',
+                ],
+                proofTitle: 'Events & Campaigns I Ran',
+                proof: [
+                    { thumb: 'assets/proof/blockchainspace/event-1-thumb.jpg',   full: 'assets/proof/blockchainspace/event-1-full.jpg',   caption: 'Community AMA / Twitter Space I hosted' },
+                    { thumb: 'assets/proof/blockchainspace/campaign-1-thumb.jpg', full: 'assets/proof/blockchainspace/campaign-1-full.jpg', caption: 'Engagement campaign results' },
+                    { thumb: 'assets/proof/blockchainspace/podcast-thumb.jpg',   full: 'assets/proof/blockchainspace/podcast-full.jpg',   caption: 'Podcast guest booking I secured' },
+                ],
+                systemsTitle: 'Systems Built',
+                tags: ['Bot Management', 'Bilingual Support', 'Event Coordination'],
+            },
+            {
+                company: 'AXCS Vision Guild',
+                title: 'Founder & Guild Leader',
+                featured: true,
+                image: 'assets/portfolio/axcs.jpg',
+                fallback: 'A',
+                results: [
+                    'Founded & led 70+ scholar community',
+                    'Resolved 200+ support tickets',
+                    'Built onboarding & cashout pipelines',
+                    'Bilingual support (Tagalog/English)',
+                ],
+                proof: [],
+                systemsTitle: 'Systems Built',
+                tags: ['Onboarding Flows', 'Cashout Pipeline', 'Scholar Management'],
+            },
+            {
+                company: 'Base Philippines',
+                title: 'Contributor',
+                featured: false,
+                image: 'assets/portfolio/base-ph.jpg',
+                fallback: 'B',
+                results: [
+                    'Based Builder Spirit Award (May 2025)',
+                    'Hosted 3 Base events with 200+ attendees',
+                    'PH Based Voices creator (Aug 2025)',
+                ],
+                proofTitle: 'Receipts',
+                proof: [
+                    { thumb: 'assets/proof/base/event-1-thumb.jpg', full: 'assets/proof/base/event-1-full.jpg', caption: 'Base PH event I hosted (200+ attendees)' },
+                    { thumb: 'assets/proof/base/award-thumb.jpg',   full: 'assets/proof/base/award-full.jpg',   caption: 'Based Builder Spirit Award, May 2025' },
+                    { thumb: 'assets/proof/base/video-thumb.jpg',   video: true, href: 'https://twitter.com/rhomurl', alt: 'PH Based Voices video content' },
+                ],
+                systemsTitle: 'Focus Areas',
+                tags: ['Content Creation', 'Event Management'],
+            },
+            {
+                company: 'Saints of LA',
+                title: 'Community Mod & Discord Security',
+                featured: false,
+                image: 'assets/portfolio/saints-of-la.jpg',
+                fallback: 'S',
+                results: [
+                    'Community growth: 200 → 2,500+ members',
+                    'Managed 500+ support tickets',
+                    'Zero-incident security during minting',
+                ],
+                proof: [],
+                systemsTitle: 'Focus Areas',
+                tags: ['Discord Security', 'Minting Support'],
+            },
+            {
+                company: 'Galaxy Fight Club',
+                title: 'Social Media Manager',
+                featured: false,
+                image: 'assets/portfolio/galaxy-fight-club.jpg',
+                fallback: 'G',
+                results: [
+                    'Weekly impressions: 8k → 20k+',
+                    'Engagement rate: 2-3% → 6%',
+                    'Bilingual content strategy',
+                ],
+                proofTitle: 'Posts & Content I Created',
+                proof: [
+                    { thumb: 'assets/proof/gfc/post-1-thumb.jpg', full: 'assets/proof/gfc/post-1-full.jpg', caption: "Top-performing thread. <a href='https://twitter.com/GalaxyFightClub' target='_blank' rel='noopener'>View live post →</a>" },
+                    { thumb: 'assets/proof/gfc/post-2-thumb.jpg', full: 'assets/proof/gfc/post-2-full.jpg', caption: "Campaign post, 20k+ impressions. <a href='https://twitter.com/GalaxyFightClub' target='_blank' rel='noopener'>View live post →</a>" },
+                    { thumb: 'assets/proof/gfc/video-thumb.jpg',  video: true, href: 'https://twitter.com/GalaxyFightClub', alt: 'Campaign video content' },
+                ],
+                systemsTitle: 'Focus Areas',
+                tags: ['Content Strategy', 'Analytics'],
+            },
+        ];
+
+        /* ================================================================
+           RENDERERS — you should rarely need to touch anything below.
+           ================================================================ */
+
+        const esc = (s) => String(s)
+            .replaceAll('&', '&amp;').replaceAll('<', '&lt;')
+            .replaceAll('>', '&gt;').replaceAll('"', '&quot;');
+
+        function renderLogos(list, containerId) {
+            document.getElementById(containerId).innerHTML = list.map(l =>
+                `<img class="brand-logo" src="${l.src}" alt="${esc(l.name)}" loading="lazy">`
+            ).join('');
+        }
+
+        function renderTools() {
+            document.getElementById('toolsGrid').innerHTML = tools.map((t, i) => {
+                const delay = i % 4 ? ` reveal-delay-${i % 4 > 3 ? 3 : i % 4}` : '';
+                return `
+                <div class="tool-item reveal${delay}">
+                    <div class="tool-icon"><i class="${t.icon}"></i></div>
+                    <span class="tool-name">${esc(t.name)}</span>
+                    <span class="tool-category">${esc(t.category)}</span>
+                </div>`;
+            }).join('');
+        }
+
+        function renderProof(p) {
+            if (!p.proof || !p.proof.length) return '';
+            const items = p.proof.map(item => {
+                if (item.video) {
+                    return `
+                        <a href="${item.href}" target="_blank" rel="noopener" class="proof-item">
+                            <img src="${item.thumb}" alt="${esc(item.alt || 'Video content')}" loading="lazy" onerror="this.parentElement.style.display='none'">
+                            <span class="proof-play"><i class="ri-play-circle-fill"></i></span>
+                        </a>`;
+                }
+                return `
+                    <a href="${item.full}" class="proof-item" data-lightbox data-caption="${(item.caption || '').replaceAll('"', '&quot;')}">
+                        <img src="${item.thumb}" alt="${esc(item.alt || 'Screenshot')}" loading="lazy" onerror="this.parentElement.style.display='none'">
+                    </a>`;
+            }).join('');
+            return `
+                <div class="portfolio-proof">
+                    <h4>${esc(p.proofTitle || 'Receipts')}</h4>
+                    <div class="proof-row">${items}</div>
+                </div>`;
+        }
+
+        function renderPortfolio() {
+            document.getElementById('portfolioGrid').innerHTML = portfolio.map((p, i) => {
+                const delay = i % 3 ? ` reveal-delay-${i % 3}` : '';
+                return `
+                <div class="portfolio-card${p.featured ? ' featured' : ''} reveal${delay}">
+                    <div class="portfolio-image">
+                        <div class="portfolio-image-fallback">${esc(p.fallback)}</div>
+                        <img src="${p.image}" alt="${esc(p.company)}" loading="lazy" onerror="this.style.display='none'">
+                    </div>
+                    <div class="portfolio-content">
+                        <div class="portfolio-company">${esc(p.company)}</div>
+                        <h3 class="portfolio-title">${esc(p.title)}</h3>
+                        <div class="portfolio-results">
+                            <h4>Results</h4>
+                            <ul>${p.results.map(r => `<li>${esc(r)}</li>`).join('')}</ul>
+                        </div>
+                        ${renderProof(p)}
+                        <div class="portfolio-systems">
+                            <h4>${esc(p.systemsTitle || 'Focus Areas')}</h4>
+                            <div class="portfolio-tags">
+                                ${p.tags.map(t => `<span class="portfolio-tag">${esc(t)}</span>`).join('')}
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+            }).join('');
+        }
+
+        // Render everything before behaviors bind to the DOM
+        renderLogos(trustLogos, 'heroTrustBrands');
+        renderLogos(moreLogos, 'moreBrands');
+        renderTools();
+        renderPortfolio();
+
+        // Logo fallback: swap missing image files for styled text
+        document.querySelectorAll('.brand-logo').forEach(img => {
+            img.addEventListener('error', () => {
+                const span = document.createElement('span');
+                span.className = 'brand-logo-fallback';
+                span.textContent = img.alt;
+                img.replaceWith(span);
+            });
         });
 
         // Navbar scroll effect
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
         });
 
         // Mobile navigation
         const mobileToggle = document.getElementById('mobileToggle');
         const mobileNav = document.getElementById('mobileNav');
         const mobileClose = document.getElementById('mobileClose');
-        const mobileLinks = mobileNav.querySelectorAll('.nav-link');
 
-        mobileToggle.addEventListener('click', () => {
-            mobileNav.classList.add('active');
-        });
-
-        mobileClose.addEventListener('click', () => {
-            mobileNav.classList.remove('active');
-        });
-
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileNav.classList.remove('active');
-            });
+        mobileToggle.addEventListener('click', () => mobileNav.classList.add('active'));
+        mobileClose.addEventListener('click', () => mobileNav.classList.remove('active'));
+        mobileNav.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => mobileNav.classList.remove('active'));
         });
 
         // Active nav link on scroll
         const sections = document.querySelectorAll('section');
-        const navLinks = document.querySelectorAll('.nav-link');
+        const navLinks = document.querySelectorAll('.nav-links .nav-link');
 
         window.addEventListener('scroll', () => {
             let current = '';
             sections.forEach(section => {
-                const sectionTop = section.offsetTop - 100;
-                const sectionHeight = section.clientHeight;
-                if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+                if (scrollY >= section.offsetTop - 100) {
                     current = section.getAttribute('id');
                 }
             });
-
             navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('active');
-                }
+                link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
             });
         });
 
-        // Smooth scroll for nav links
+        // Smooth scroll with header offset
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
-                e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    const headerOffset = 80;
-                    const elementPosition = target.getBoundingClientRect().top;
-                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
+                    e.preventDefault();
                     window.scrollTo({
-                        top: offsetPosition,
+                        top: target.getBoundingClientRect().top + window.pageYOffset - 80,
                         behavior: 'smooth'
                     });
                 }
             });
         });
 
-        // Scroll reveal animation
-        const revealElements = document.querySelectorAll('.reveal');
-
-        const revealOnScroll = () => {
-            revealElements.forEach(el => {
-                const elementTop = el.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-                if (elementTop < windowHeight - 100) {
-                    el.classList.add('visible');
+        // Scroll reveal via IntersectionObserver (cheaper than scroll listeners)
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
                 }
             });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.reveal, .authority-item').forEach(el => observer.observe(el));
+
+        // Count-up animation for authority stats
+        const statObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                const el = entry.target;
+                statObserver.unobserve(el);
+
+                const raw = el.textContent.trim();
+                const match = raw.match(/^([\d,]+)(.*)$/);
+                if (!match) return;
+
+                const target = parseInt(match[1].replace(/,/g, ''), 10);
+                const suffix = match[2];
+                const duration = 1400;
+                const start = performance.now();
+
+                const tick = (now) => {
+                    const progress = Math.min((now - start) / duration, 1);
+                    const eased = 1 - Math.pow(1 - progress, 3);
+                    const value = Math.round(target * eased);
+                    el.textContent = value.toLocaleString() + suffix;
+                    if (progress < 1) requestAnimationFrame(tick);
+                };
+
+                if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                    el.textContent = target.toLocaleString() + suffix;
+                } else {
+                    requestAnimationFrame(tick);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.authority-number, .network-stat').forEach(el => statObserver.observe(el));
+
+        // Scroll progress bar
+        const progressBar = document.getElementById('scrollProgress');
+        window.addEventListener('scroll', () => {
+            const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+            progressBar.style.width = (window.scrollY / scrollable * 100) + '%';
+        }, { passive: true });
+
+        // Lightbox for proof images
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const lightboxCaption = document.getElementById('lightboxCaption');
+
+        document.querySelectorAll('[data-lightbox]').forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                lightboxImg.src = item.getAttribute('href');
+                lightboxCaption.innerHTML = item.getAttribute('data-caption') || '';
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        const closeLightbox = () => {
+            lightbox.classList.remove('active');
+            lightboxImg.src = '';
+            document.body.style.overflow = '';
         };
 
-        window.addEventListener('scroll', revealOnScroll);
-        window.addEventListener('load', revealOnScroll);
+        document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightbox.classList.contains('active')) closeLightbox();
+        });
 
-        // Copy email function
+        // Copy email
         function copyEmail() {
             navigator.clipboard.writeText('me@rhomuel.com').then(() => {
                 const btn = document.querySelector('.copy-btn');
@@ -2591,31 +2311,6 @@
                     btn.style.background = '';
                     btn.style.color = '';
                 }, 2000);
-            });
-        }
-
-        // Filter tools function
-        function filterTools(category) {
-            const tools = document.querySelectorAll('.tool-item');
-            const buttons = document.querySelectorAll('.tools-category-btn');
-
-            // Update active button
-            buttons.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-
-            // Filter tools
-            tools.forEach(tool => {
-                if (category === 'all' || tool.dataset.category === category) {
-                    tool.style.display = 'flex';
-                    tool.style.opacity = '0';
-                    tool.style.transform = 'translateY(20px)';
-                    setTimeout(() => {
-                        tool.style.opacity = '1';
-                        tool.style.transform = 'translateY(0)';
-                    }, 50);
-                } else {
-                    tool.style.display = 'none';
-                }
             });
         }
     </script>
