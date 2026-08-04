@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RHOMURL — AI Automation &amp; Community Operations</title>
+<meta name="description" content="Rhomuel (RHOMURL). I build AI automation and community operations systems. Book a strategy call.">
+<meta property="og:title" content="RHOMURL — AI Automation &amp; Community Operations">
+<meta property="og:description" content="Communities that run themselves. Book a 30-minute strategy call.">
+<meta property="og:type" content="profile">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  /* ─────────────────────────────────────────────
+     BRAND TOKENS — swap --signal to match rhomuel.com
+     ───────────────────────────────────────────── */
+  :root{
+    --ink:      #070A11;
+    --panel:    #0F1420;
+    --panel-2:  #141A28;
+    --line:     #1D2434;
+    --line-hi:  #2A3346;
+    --text:     #E9EDF5;
+    --muted:    #7A8598;
+    --signal:   #FFB84D;   /* primary accent */
+    --live:     #4ADE80;   /* semantic only: online status */
+    --radius:   14px;
+    --maxw:     500px;
+  }
+
+  *,*::before,*::after{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--ink);
+    color:var(--text);
+    font-family:"Inter",system-ui,-apple-system,sans-serif;
+    font-size:15px;
+    line-height:1.5;
+    display:flex;
+    justify-content:center;
+    padding:28px 18px 56px;
+    min-height:100vh;
+  }
+  /* faint grid, reads as instrumentation not decoration */
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background-image:
+      linear-gradient(var(--line) 1px,transparent 1px),
+      linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:64px 64px;
+    opacity:.28;
+    mask-image:radial-gradient(ellipse 90% 55% at 50% 0%,#000 0%,transparent 75%);
+    -webkit-mask-image:radial-gradient(ellipse 90% 55% at 50% 0%,#000 0%,transparent 75%);
+    pointer-events:none;
+  }
+  .wrap{width:100%;max-width:var(--maxw);position:relative;z-index:1}
+
+  .mono{font-family:"JetBrains Mono",ui-monospace,monospace}
+
+  /* ── status bar ─────────────────────────── */
+  .statusbar{
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+    font-family:"JetBrains Mono",monospace;
+    font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--muted);
+    border:1px solid var(--line);
+    background:rgba(15,20,32,.7);
+    backdrop-filter:blur(6px);
+    border-radius:100px;
+    padding:9px 16px;
+  }
+  .status-left{display:flex;align-items:center;gap:8px;color:var(--text)}
+  .dot{
+    width:7px;height:7px;border-radius:50%;
+    background:var(--live);
+    box-shadow:0 0 0 0 rgba(74,222,128,.6);
+    animation:pulse 2.4s ease-out infinite;
+    flex:none;
+  }
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(74,222,128,.55)}
+    70%{box-shadow:0 0 0 8px rgba(74,222,128,0)}
+    100%{box-shadow:0 0 0 0 rgba(74,222,128,0)}
+  }
+
+  /* ── identity ───────────────────────────── */
+  .id{
+    margin-top:14px;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    background:linear-gradient(180deg,var(--panel-2),var(--panel));
+    padding:24px 22px 20px;
+  }
+  .id-top{display:flex;align-items:center;gap:15px}
+  .avatar{
+    width:62px;height:62px;border-radius:50%;flex:none;
+    object-fit:cover;
+    border:1px solid var(--line-hi);
+    background:var(--panel-2);
+  }
+  .wordmark{
+    font-family:"Archivo",sans-serif;
+    font-variation-settings:"wdth" 112,"wght" 800;
+    font-size:29px;line-height:1;letter-spacing:-.005em;
+    text-transform:uppercase;margin:0;
+  }
+  .realname{
+    font-family:"JetBrains Mono",monospace;
+    font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--muted);margin-top:7px;
+  }
+  .pitch{
+    margin:18px 0 0;font-size:15.5px;line-height:1.55;color:#C3CBD9;
+  }
+  .pitch b{color:var(--text);font-weight:600}
+  .pitch em{color:var(--signal);font-style:normal;font-weight:600}
+
+  .open{
+    display:flex;align-items:flex-start;gap:9px;
+    margin:15px 0 0;padding:11px 13px;
+    border:1px solid var(--line);
+    border-left:2px solid var(--signal);
+    border-radius:8px;
+    background:rgba(255,184,77,.04);
+    font-size:13px;line-height:1.45;color:#B4BDCC;
+  }
+  .open-dot{
+    width:6px;height:6px;border-radius:50%;flex:none;
+    background:var(--signal);margin-top:6px;
+  }
+
+  /* ── metrics ────────────────────────────── */
+  .metrics{
+    display:grid;grid-template-columns:repeat(3,1fr);
+    margin-top:20px;border-top:1px solid var(--line);
+  }
+  .metric{padding:15px 4px 2px;border-right:1px solid var(--line)}
+  .metric:last-child{border-right:0}
+  .metric .v{
+    font-family:"Archivo",sans-serif;
+    font-variation-settings:"wdth" 100,"wght" 700;
+    font-size:22px;line-height:1;
+  }
+  .metric .k{
+    font-family:"JetBrains Mono",monospace;
+    font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--muted);margin-top:6px;
+  }
+
+  /* ── section labels ─────────────────────── */
+  .label{
+    display:flex;align-items:center;gap:10px;
+    font-family:"JetBrains Mono",monospace;
+    font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--muted);
+    margin:28px 0 11px;
+  }
+  .label::after{content:"";flex:1;height:1px;background:var(--line)}
+
+  /* ── link rows ──────────────────────────── */
+  .row{
+    display:flex;align-items:center;gap:14px;
+    text-decoration:none;color:inherit;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    background:var(--panel);
+    padding:15px 17px;
+    margin-bottom:9px;
+    transition:border-color .18s ease,background .18s ease,transform .18s ease;
+  }
+  .row:hover,.row:focus-visible{
+    border-color:var(--line-hi);background:var(--panel-2);transform:translateY(-1px);
+  }
+  .row .txt{flex:1;min-width:0}
+  .row .t{font-weight:600;font-size:14.5px}
+  .row .s{
+    font-family:"JetBrains Mono",monospace;
+    font-size:10.5px;letter-spacing:.06em;color:var(--muted);margin-top:4px;
+  }
+  .arrow{color:var(--muted);flex:none;transition:transform .18s ease,color .18s ease}
+  .row:hover .arrow{transform:translateX(3px);color:var(--text)}
+
+  /* primary CTA */
+  .row.primary{
+    background:var(--signal);
+    border-color:var(--signal);
+    color:#1A1204;
+  }
+  .row.primary .s{color:rgba(26,18,4,.62)}
+  .row.primary .arrow{color:rgba(26,18,4,.65)}
+  .row.primary:hover{background:#FFC469;border-color:#FFC469;transform:translateY(-1px)}
+  .row.primary:hover .arrow{color:#1A1204}
+  .badge{
+    font-family:"JetBrains Mono",monospace;
+    font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;
+    background:rgba(26,18,4,.14);color:#1A1204;
+    padding:4px 8px;border-radius:100px;flex:none;
+  }
+
+  /* ── socials ────────────────────────────── */
+  .socials{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .chip{
+    display:flex;align-items:center;justify-content:center;gap:7px;
+    text-decoration:none;
+    border:1px solid var(--line);border-radius:10px;
+    background:var(--panel);
+    color:var(--muted);
+    font-family:"JetBrains Mono",monospace;
+    font-size:10px;letter-spacing:.09em;text-transform:uppercase;
+    padding:11px 6px;
+    transition:color .18s ease,border-color .18s ease,background .18s ease;
+  }
+  .chip svg{width:14px;height:14px;flex:none;fill:currentColor}
+  .chip:hover,.chip:focus-visible{color:var(--text);border-color:var(--line-hi);background:var(--panel-2)}
+
+  /* ── JUPITER CARD — partner brand, kept separate ── */
+  .jup{
+    display:block;text-decoration:none;color:#fff;
+    border-radius:20px;overflow:hidden;
+    background:#050D0F;
+    border:1px solid #14282B;
+    position:relative;
+    transition:transform .2s ease,border-color .2s ease;
+  }
+  .jup:hover,.jup:focus-visible{transform:translateY(-2px);border-color:#1F4147}
+  .jup-face{position:relative;padding:26px 24px 22px;overflow:hidden}
+  .jup-face::before{
+    content:"";position:absolute;inset:-40%;
+    background:
+      radial-gradient(48% 38% at 22% 26%,rgba(34,211,238,.32),transparent 62%),
+      radial-gradient(52% 42% at 74% 30%,rgba(16,185,129,.30),transparent 64%),
+      radial-gradient(46% 40% at 46% 82%,rgba(74,222,128,.24),transparent 66%),
+      radial-gradient(60% 50% at 88% 92%,rgba(34,211,238,.18),transparent 70%);
+    filter:blur(22px);
+    animation:drift 18s ease-in-out infinite alternate;
+  }
+  @keyframes drift{
+    0%{transform:translate3d(-3%,-2%,0) scale(1)}
+    100%{transform:translate3d(4%,3%,0) scale(1.1)}
+  }
+  .jup-face > *{position:relative}
+  .jup-brand{
+    display:flex;align-items:center;gap:9px;
+    font-weight:600;font-size:14.5px;letter-spacing:-.01em;
+  }
+  .jup-head{
+    font-family:"Archivo",sans-serif;
+    font-variation-settings:"wdth" 100,"wght" 800;
+    font-size:34px;line-height:1.06;letter-spacing:-.02em;
+    margin:38px 0 0;
+  }
+  .jup-head span{
+    background:linear-gradient(95deg,#38BDF8 0%,#34D399 52%,#A3E635 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .jup-sub{color:#93A5A8;font-size:14px;margin-top:11px}
+  .jup-code{
+    display:flex;align-items:baseline;gap:10px;
+    margin-top:40px;
+    font-family:"JetBrains Mono",monospace;font-size:13px;
+  }
+  .jup-code .lbl{color:#7E9295;font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+  .jup-code .val{font-weight:700;letter-spacing:.06em}
+  .jup-foot{
+    border-top:1px dashed #1E3237;
+    padding:14px 24px;
+    display:flex;align-items:center;justify-content:space-between;
+    font-size:13px;font-weight:500;color:#CFDBDC;
+    background:#0A1315;
+  }
+  .jup-foot .cta{color:#9FEFD0}
+  .mark{width:18px;height:18px;flex:none;display:block}
+  .jup-foot-brand{display:flex;align-items:center;gap:9px}
+
+  .copy{
+    display:block;width:100%;margin-top:9px;
+    background:transparent;border:1px solid var(--line);
+    border-radius:10px;color:var(--muted);
+    font-family:"JetBrains Mono",monospace;
+    font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+    padding:11px;cursor:pointer;
+    transition:color .18s ease,border-color .18s ease;
+  }
+  .copy:hover,.copy:focus-visible{color:var(--text);border-color:var(--line-hi)}
+  .copy.done{color:var(--live);border-color:rgba(74,222,128,.35)}
+
+  footer{
+    margin-top:30px;text-align:center;
+    font-family:"JetBrains Mono",monospace;
+    font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#4E586B;
+  }
+  footer a{color:#4E586B;text-decoration:none}
+  footer a:hover{color:var(--muted)}
+
+  :focus-visible{outline:2px solid var(--signal);outline-offset:3px}
+
+  @media (max-width:400px){
+    .wordmark{font-size:25px}
+    .jup-head{font-size:29px}
+    .metric .v{font-size:19px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none !important;transition:none !important}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- STATUS BAR -->
+  <div class="statusbar">
+    <div class="status-left"><span class="dot"></span><span>Available for projects</span></div>
+    <div><span id="clock">--:--</span> MNL</div>
+  </div>
+
+  <!-- IDENTITY -->
+  <section class="id">
+    <div class="id-top">
+      <img class="avatar" src="https://rhomuel.com/assets/rhomurl_pfp.jpg" alt="Rhomuel Brian Macahilig"
+           onerror="this.style.display='none'">
+      <div>
+        <h1 class="wordmark">Rhomurl</h1>
+        <div class="realname">Rhomuel Brian Macahilig</div>
+      </div>
+    </div>
+
+    <p class="pitch">
+      I build <b>AI automation and community operations systems</b> for coaches, startups, and Web3 teams,
+      so your community grows without <em>burning out your team</em>.
+    </p>
+
+    <p class="open">
+      <span class="open-dot"></span>
+      Also open to content creator collaborations and ambassadorships.
+    </p>
+
+    <div class="metrics">
+      <div class="metric"><div class="v">60+</div><div class="k">Hrs saved / mo</div></div>
+      <div class="metric"><div class="v">12+</div><div class="k">Projects</div></div>
+      <div class="metric"><div class="v">4,500+</div><div class="k">Members grown</div></div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <div class="label">Work with me</div>
+
+  <a class="row primary" href="https://calendly.com/rhomurl/30min" target="_blank" rel="noopener">
+    <div class="txt">
+      <div class="t">Book a strategy call</div>
+      <div class="s">30 min · free · Calendly</div>
+    </div>
+    <span class="badge">Start here</span>
+  </a>
+
+  <a class="row" href="https://rhomuel.com/" target="_blank" rel="noopener">
+    <div class="txt">
+      <div class="t">Portfolio &amp; case studies</div>
+      <div class="s">rhomuel.com · systems, results, stack</div>
+    </div>
+    <span class="arrow">→</span>
+  </a>
+
+  <a class="row" href="https://t.me/rhomurl" target="_blank" rel="noopener">
+    <div class="txt">
+      <div class="t">Message me directly</div>
+      <div class="s">Telegram · fastest reply</div>
+    </div>
+    <span class="arrow">→</span>
+  </a>
+
+  <!-- FOLLOW -->
+  <div class="label">Follow</div>
+  <div class="socials">
+    <a class="chip" href="https://twitter.com/rhomurl" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.24 2.25h3.31l-7.23 8.26 8.5 11.24h-6.66l-5.21-6.82-5.97 6.82H1.66l7.73-8.84L1.25 2.25h6.83l4.71 6.23 5.45-6.23Zm-1.16 17.52h1.83L7.08 4.13H5.11l11.97 15.64Z"/></svg>X
+    </a>
+    <a class="chip" href="https://linkedin.com/in/rhomurl" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM2.4 9.75h5.16V21H2.4V9.75Zm7.9 0h4.95v1.54h.07c.69-1.24 2.37-2.55 4.88-2.55 5.22 0 6.18 3.3 6.18 7.6V21h-5.15v-3.77c0-1.8-.03-4.12-2.58-4.12-2.58 0-2.98 1.96-2.98 3.99V21H10.3V9.75Z"/></svg>LinkedIn
+    </a>
+    <a class="chip" href="https://github.com/rhomurl" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5a12 12 0 0 0-3.79 23.39c.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.21.09 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.5 1 .11-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6.01 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.66.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.62-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.21.7.83.58A12 12 0 0 0 12 .5Z"/></svg>GitHub
+    </a>
+    <a class="chip" href="https://tiktok.com/@rhomurl" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 5.82a4.28 4.28 0 0 1-1.06-2.82h-3.3v11.9a2.59 2.59 0 1 1-1.85-2.48V9.05a5.87 5.87 0 1 0 5.15 5.83V9.4a7.55 7.55 0 0 0 4.4 1.41V7.5a4.29 4.29 0 0 1-3.34-1.68Z"/></svg>TikTok
+    </a>
+    <a class="chip" href="https://instagram.com/rhomurl" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16Zm0 3.68a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32Zm0 10.16a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm7.84-10.4a1.44 1.44 0 1 1-2.88 0 1.44 1.44 0 0 1 2.88 0Z"/></svg>Instagram
+    </a>
+    <a class="chip" href="https://www.youtube.com/playlist?list=PLmYarEwqz2UK49PLqor-QWonAk91sRg0I" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.5a3.02 3.02 0 0 0-2.12-2.14C19.5 3.85 12 3.85 12 3.85s-7.5 0-9.38.51A3.02 3.02 0 0 0 .5 6.5C0 8.38 0 12 0 12s0 3.62.5 5.5a3.02 3.02 0 0 0 2.12 2.14c1.88.51 9.38.51 9.38.51s7.5 0 9.38-.51a3.02 3.02 0 0 0 2.12-2.14C24 15.62 24 12 24 12s0-3.62-.5-5.5ZM9.6 15.6V8.4l6.25 3.6-6.25 3.6Z"/></svg>YouTube
+    </a>
+  </div>
+
+  <!-- JUPITER — partner brand, visually quarantined -->
+  <div class="label">What I use</div>
+
+  <a class="jup" href="https://jupiter.go.link/9r1dh" target="_blank" rel="noopener">
+    <div class="jup-face">
+      <div class="jup-brand">
+        <img class="mark" src="https://jup.ag/svg/jupiter-logo.svg" alt="" aria-hidden="true">
+        Jupiter Mobile
+      </div>
+      <h2 class="jup-head">I use Jupiter.<br><span>You should too.</span></h2>
+      <p class="jup-sub">Join me on the onchain money app</p>
+      <div class="jup-code">
+        <span class="lbl">Referral code</span>
+        <span class="val">RHOMURL9</span>
+      </div>
+    </div>
+    <div class="jup-foot">
+      <span class="jup-foot-brand"><img class="mark" src="https://jup.ag/svg/jupiter-logo.svg" alt="" aria-hidden="true">Jupiter Mobile</span>
+      <span class="cta">Download app →</span>
+    </div>
+  </a>
+
+  <button class="copy" id="copyBtn" type="button">Copy code RHOMURL9</button>
+
+  <footer>
+    © <span id="yr">2026</span> RHOMURL · <a href="https://rhomuel.com/" target="_blank" rel="noopener">Building systems that scale</a>
+  </footer>
+</div>
+
+<script>
+  // Manila clock — the page is a live system, not a static card
+  function tick(){
+    var t = new Intl.DateTimeFormat('en-GB',{
+      timeZone:'Asia/Manila',hour:'2-digit',minute:'2-digit',hour12:false
+    }).format(new Date());
+    document.getElementById('clock').textContent = t;
+  }
+  tick(); setInterval(tick,15000);
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  var btn = document.getElementById('copyBtn');
+  btn.addEventListener('click', function(){
+    navigator.clipboard.writeText('RHOMURL9').then(function(){
+      btn.textContent = 'Copied';
+      btn.classList.add('done');
+      setTimeout(function(){
+        btn.textContent = 'Copy code RHOMURL9';
+        btn.classList.remove('done');
+      }, 2000);
+    }).catch(function(){
+      btn.textContent = 'Copy failed — code is RHOMURL9';
+    });
+  });
+</script>
+</body>
+</html>
