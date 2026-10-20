@@ -1402,6 +1402,26 @@
             font-size: 14px;
         }
 
+        .bir-badge {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px;
+            background: #ffffff;
+            border-radius: 8px;
+            line-height: 0;
+            transition: transform 0.2s ease;
+        }
+
+        .bir-badge:hover {
+            transform: translateY(-2px);
+        }
+
+        .bir-badge img {
+            width: 280px;
+            max-width: 100%;
+            height: auto;
+        }
+
         /* Mobile Navigation */
         .mobile-nav {
             display: none;
@@ -1917,6 +1937,9 @@
 
     <!-- Footer -->
     <footer>
+        <a class="bir-badge" href="assets/bir-registered-2024.jpg" target="_blank" rel="noopener" title="View BIR registration seal">
+            <img src="assets/bir-registered-2024.jpg" alt="BIR Registered 2024 seal, RSN 059RC20240000005700" width="280" height="106" loading="lazy">
+        </a>
         <p>© 2026 RHOMURL. Building Systems That Scale.</p>
     </footer>
 
